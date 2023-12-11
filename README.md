@@ -1,0 +1,2 @@
+# ciszewski_klon_piekielnie_dobry_projekt
+projekt na Programowanie Obiektowe
