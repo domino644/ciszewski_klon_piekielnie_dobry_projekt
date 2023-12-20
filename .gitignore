@@ -79,6 +79,8 @@ fabric.properties
 ProjekPo/.idea
 ProjekPo/.gitignore
 ProjekPo/gradlew.bat
+ProjekPo/gradlew
 ProjekPo/gradle/wrapper
 ProjekPo/.gradle
+/.idea
 
