@@ -76,4 +76,17 @@ public enum MapDirection {
             case SOUTH_WEST -> "SW";
         };
     }
+    public MapDirection numberToMapDirection(int number){
+        return switch (number){
+            case 0 -> NORTH;
+            case 1 -> NORTH_EAST;
+            case 2 -> EAST;
+            case 3 -> SOUTH_EAST;
+            case 4 -> SOUTH;
+            case 5 -> SOUTH_WEST;
+            case 6 -> WEST;
+            case 7 -> NORTH_WEST;
+            default -> throw new IllegalStateException("Unexpected value: " + number);
+        };
+    }
 }
