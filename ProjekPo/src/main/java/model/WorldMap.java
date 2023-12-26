@@ -10,11 +10,13 @@ public class WorldMap implements MoveValidator {
     private final Vector2d upperBoundary;
     private final HashMap<Vector2d, Animal> animals = new HashMap<>();
     private final HashMap<Vector2d, Plant> plants = new HashMap<>();
+    private final RandomVectorGenerator randomVectorGenerator;
 
     public WorldMap(int width, int height, Vector2d[] animalsPositions, Vector2d[] plantsPositions) {
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("Width and height of map have to be greater than 0");
         }
+        randomVectorGenerator = new RandomVectorGenerator(width, height);
         this.upperBoundary = new Vector2d(width, height);
 
         for (Vector2d v : animalsPositions) {
@@ -41,9 +43,11 @@ public class WorldMap implements MoveValidator {
 
     @Override
     public boolean isOutOfBounds(Vector2d position) {
-        return position.getX() >= lowerBoundary.getX() &&
-                position.getX() <= upperBoundary.getX() &&
-                position.getY() >= lowerBoundary.getY() &&
-                position.getY() <= upperBoundary.getY();
+        return position.precedes(upperBoundary) && position.follows(lowerBoundary);
+    }
+
+    @Override
+    public Vector2d RandomVector() {
+        return randomVectorGenerator.RandomVector();
     }
 }

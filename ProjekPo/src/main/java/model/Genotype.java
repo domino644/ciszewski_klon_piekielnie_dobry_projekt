@@ -2,14 +2,26 @@ package model;
 
 import enums.MapDirection;
 
-public class Genotype {
-    private final MapDirection[] genes;
+import java.util.ArrayList;
+import java.util.Random;
 
-    public Genotype(MapDirection[] genes) {
+public class Genotype {
+    private final int[] genes;
+    Random random = new Random();
+
+    public Genotype(int[] genes) {
         this.genes = genes;
     }
 
-    public MapDirection[] getGenes() {
+    public Genotype(int numberOfGenes){
+        ArrayList<Integer> genes = new ArrayList<>();
+        for (int i = 0; i < numberOfGenes; i++) {
+            genes.add(randomGene());
+        }
+        this.genes = genes.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public int[] getGenes() {
         return genes.clone();
     }
 
@@ -21,12 +33,23 @@ public class Genotype {
         if (index1 < 0 || index2 < 0 || index1 >= genes.length || index2 >= genes.length) {
             throw new IndexOutOfBoundsException("Indeksy genów wykraczają poza tablice genotypu");
         }
-        MapDirection temp = genes[index1];
+        int temp = genes[index1];
         genes[index1] = genes[index2];
         genes[index2] = temp;
     }
 
-    public MapDirection geneAt(int index){
+    public void changeGene(int index){
+        if (index < 0 ||  index >= genes.length) {
+            throw new IndexOutOfBoundsException("Indeks genu wykraczają poza tablice genotypu");
+        }
+        genes[index] = randomGene();
+    }
+
+    private int randomGene(){
+        return random.nextInt(8);
+    }
+
+    public int geneAt(int index){
         if (index < 0 || index >= genes.length) {
             throw new IndexOutOfBoundsException("Indeks wykracza poza tablice genotypu");
         }
