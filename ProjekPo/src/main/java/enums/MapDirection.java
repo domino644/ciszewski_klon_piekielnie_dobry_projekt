@@ -76,7 +76,7 @@ public enum MapDirection {
             case SOUTH_WEST -> "SW";
         };
     }
-    public MapDirection numberToMapDirection(int number){
+    public static MapDirection numberToMapDirection(int number){
         return switch (number){
             case 0 -> NORTH;
             case 1 -> NORTH_EAST;

@@ -22,6 +22,14 @@ public class RandomVectorGenerator implements GetRandomVector {
         return new Vector2d(random.nextInt(width), random.nextInt(height));
     }
 
+    public ArrayList<Vector2d> RandomVectorAnimal(int n){
+        ArrayList<Vector2d> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            result.add(this.RandomVector());
+        }
+        return result;
+    }
+
     public ArrayList<Vector2d> RandomVectorGrass(Vector2d[] occupiedPositions,int n){
         Random random = new Random();
         ArrayList<Vector2d> result = new ArrayList<>();
