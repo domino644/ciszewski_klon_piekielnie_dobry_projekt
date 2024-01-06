@@ -4,17 +4,22 @@ import enums.MapDirection;
 import interfaces.MoveValidator;
 import interfaces.MoveableWorldElement;
 
+import java.util.Random;
+
 public class Animal implements MoveableWorldElement {
     private Vector2d position;
     private final Genotype genotype;
     private int currentGen;
     private int energyLevel;
-    private MapDirection orientation = MapDirection.NORTH;
+    private MapDirection orientation;
+    private int age = 0;
+    private int numberOfChildren = 0;
     public Animal(Vector2d position,int numberOfGenes,int energyLevel){
         this.position = position;
         genotype = new Genotype(numberOfGenes);
-        currentGen = 0;
         this.energyLevel = energyLevel;
+        randomOrientation();
+        randomGene(numberOfGenes);
     }
 
     public Animal(Vector2d position,int energyLevel){
@@ -42,11 +47,32 @@ public class Animal implements MoveableWorldElement {
         return position;
     }
 
+    public Animal reproduceAnimal(Animal animal){
+        this.getEnergyLevel();
+    }
+
     public void decreaseEnergyLevel(int x){
         energyLevel = energyLevel - x;
+    }
+    public void increaseEnergyLevel(int x){
+        energyLevel = energyLevel + x;
     }
 
     public int getEnergyLevel() {
         return energyLevel;
     }
+
+    public int getAge() { return age;}
+
+    public int getNumberOfChildren() { return numberOfChildren;}
+
+    private void randomOrientation(){
+        Random random = new Random();
+        this.orientation = MapDirection.numberToMapDirection(random.nextInt(8));
+    }
+    private void randomGene(int numberOfGenes){
+        Random random = new Random();
+        this.currentGen = random.nextInt(numberOfGenes);
+    }
+
 }
