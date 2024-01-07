@@ -39,10 +39,21 @@ public class Genotype {
     }
 
     public void changeGene(int index){
-        if (index < 0 ||  index >= genes.length) {
-            throw new IndexOutOfBoundsException("Indeks genu wykraczają poza tablice genotypu");
+        int randomNumber = random.nextInt(6);
+        if (randomNumber != 0){
+            if (index < 0 ||  index >= genes.length) {
+                throw new IndexOutOfBoundsException("Indeks genu wykraczają poza tablice genotypu");
+            }
+            genes[index] = randomGene();
         }
-        genes[index] = randomGene();
+        else {
+            int randomIndex = random.nextInt(genes.length);
+            swapGene(index,randomIndex);
+        }
+    }
+
+    public void changeGene(){
+        changeGene(random.nextInt(genes.length));
     }
 
     private int randomGene(){
