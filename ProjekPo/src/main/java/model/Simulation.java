@@ -14,11 +14,12 @@ public class Simulation{
     private final int minimalMutationNumber;
     private final int maximalMutationNumber;
     private final int plantEnergy;
+    private final int lossEnergyPerDay;
     private final RandomVectorGenerator randomVectorGenerator;
 
     public Simulation (WorldMap map,int numberOfPlantsGrowPerDay,int minimalEnergyToReproduction
             ,int reproducingEnergy,int minimalMutationNumber,int maximalMutationNumber,
-                       int plantEnergy, RandomVectorGenerator randomVectorGenerator){
+                       int plantEnergy, RandomVectorGenerator randomVectorGenerator,int lossEnergyPerDay){
         this.map = map;
         this.maximalMutationNumber = maximalMutationNumber;
         this.numberOfPlantsGrowPerDay = numberOfPlantsGrowPerDay;
@@ -27,6 +28,7 @@ public class Simulation{
         this.minimalMutationNumber = minimalMutationNumber;
         this.minimalEnergyToReproduction = minimalEnergyToReproduction;
         this.randomVectorGenerator = randomVectorGenerator;
+        this.lossEnergyPerDay = lossEnergyPerDay;
     }
 
     public ArrayList<Animal> allAnimalsOnBoard(HashMap<Vector2d,ArrayList<Animal>> animals){
@@ -43,6 +45,7 @@ public class Simulation{
         for (Animal animal : animalsOnBoard) {
             prevMovePosition = animal.getPosition();
             animal.move(map);
+            animal.decreaseEnergyLevel(lossEnergyPerDay);
             afterMovePosition = animal.getPosition();
             if (prevMovePosition != afterMovePosition){
                 animals.get(prevMovePosition).remove(animal);
@@ -98,6 +101,14 @@ public class Simulation{
         }
     }
 
+    private void clearMap(HashMap<Vector2d,ArrayList<Animal>> animals,ArrayList<Animal> animalsOnBoard){
+        for (Animal animal: animalsOnBoard){
+            if (animal.getEnergyLevel()  < 0 ){
+                animals.get(animal.getPosition()).remove(animal);
+            }
+        }
+    }
+
     public void dailyMapChange(){
         HashMap<Vector2d,ArrayList<Animal>> animals = map.getAnimals();
         HashMap<Vector2d,Plant> plants = map.getPlants();
@@ -105,6 +116,7 @@ public class Simulation{
         animalMoves(animalsOnBoard,animals);
         animalEats(animals,plants);
         animalReproducing(animals);
+        clearMap(animals,animalsOnBoard);
         ArrayList<Vector2d> newGrassPosition = randomVectorGenerator.RandomVectorGrass(plants.keySet().toArray(new Vector2d[0]), numberOfPlantsGrowPerDay);
         for (Vector2d vector2d : newGrassPosition){
             plants.put(vector2d,new Plant(vector2d));

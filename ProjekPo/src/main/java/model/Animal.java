@@ -84,6 +84,14 @@ public class Animal implements MoveableWorldElement {
                 futureAnimalGenes.add(animalGenes[i]);
             }
         }
+        else {
+            for (int i = 0; i < animalGenesNumber; i++) {
+                futureAnimalGenes.add(animalGenes[i]);
+            }
+            for (int i = animalGenesNumber; i < thisAnimalGenesNumber+animalGenesNumber; i++) {
+                futureAnimalGenes.add(thisAnimalGenes[i]);
+            }
+        }
         return new Genotype(futureAnimalGenes.stream().mapToInt(Integer::intValue).toArray());
     }
 
