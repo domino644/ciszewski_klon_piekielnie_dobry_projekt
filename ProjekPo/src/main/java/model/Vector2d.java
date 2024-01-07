@@ -23,7 +23,7 @@ public class Vector2d {
     }
 
     public boolean precedes(Vector2d other) {
-        return x <= other.getX() && y <= other.getY();
+        return x < other.getX() && y < other.getY();
     }
 
     public boolean follows(Vector2d other) {
