@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="presenter.SimulationPresenter"
+            minHeight="550.0" minWidth="850.0">
+    <top>
+        <HBox alignment="BASELINE_CENTER">
+            <Label fx:id="messageLabel"/>
+            <Button fx:id="startButton" text="Start" textAlignment="CENTER" onAction="#onSimulationStartClicked"/>
+        </HBox>
+    </top>
+    <center>
+        <GridPane fx:id="mapGrid" gridLinesVisible="true" alignment="CENTER"/>
+    </center>
+</BorderPane>

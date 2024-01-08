@@ -26,6 +26,10 @@ test {
     useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 //application {
 //    getMainClass().set('agh.ics.oop.World')
 //}
