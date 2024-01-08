@@ -1,19 +1,21 @@
 package model;
 
+import interfaces.MapChangeListener;
 import interfaces.MoveValidator;
-import interfaces.WorldElement;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class WorldMap implements MoveValidator,Runnable {
+
+public class WorldMap implements MoveValidator, Runnable {
     private final Vector2d lowerBoundary = new Vector2d(0, 0);
     private final Vector2d upperBoundary;
     private final HashMap<Vector2d, ArrayList<Animal>> animals = new HashMap<>();
     private final HashMap<Vector2d, Plant> plants = new HashMap<>();
     private final RandomVectorGenerator randomVectorGenerator;
     private final Simulation simulation;
+    private final ArrayList<MapChangeListener> listeners = new ArrayList<>();
 
 
     public WorldMap(int width, int height, int numberOfAnimals, int numberOfPlants,
@@ -49,15 +51,16 @@ public class WorldMap implements MoveValidator,Runnable {
         }
     }
 
-    public String objectAt(Vector2d position){
-        if (!animals.get(position).isEmpty()){
+    public String objectAt(Vector2d position) {
+        if (animals.get(position) != null && !animals.get(position).isEmpty()) {
             return "*";
         }
-        if (plants.get(position) != null) {
+        if (plants.get(position) != null && plants.get(position) != null) {
             return "@";
         }
         return null;
     }
+
     public ArrayList<Animal> animalsAt(Vector2d position) {
         return animals.get(position);
     }
@@ -91,17 +94,37 @@ public class WorldMap implements MoveValidator,Runnable {
         return animals;
     }
 
+    public void addListener(MapChangeListener listener) {
+        listeners.add(listener);
+    }
+
+    public void mapChangedEmit(String message) {
+        for (MapChangeListener listener : listeners) {
+            listener.mapChanged(this, message);
+        }
+    }
+
+    public Vector2d getLowerBoundary(){
+        return lowerBoundary;
+    }
+
+    public Vector2d getUpperBoundary(){
+        return upperBoundary;
+    }
+
     @Override
     public void run() {
-//        while (true){
-//            simulation.dailyMapChange();
-//        }
-//    }
         MapVisualizer vis = new MapVisualizer(this);
-        for (int i = 0; i < 10; i++) {
-            System.out.println("Day: " + i);
-            simulation.dailyMapChange();
-            System.out.println(vis.draw(this.lowerBoundary,this.upperBoundary));
+        try {
+            for (int i = 0; i < 10; i++) {
+                System.out.println("Day: " + i);
+                simulation.dailyMapChange();
+                System.out.println(vis.draw(this.lowerBoundary, this.upperBoundary));
+                Thread.sleep(500);
+            }
+        }catch (InterruptedException e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException();
         }
     }
 }

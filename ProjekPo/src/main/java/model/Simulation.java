@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Simulation{
 
@@ -50,6 +49,7 @@ public class Simulation{
             if (prevMovePosition != afterMovePosition){
                 animals.get(prevMovePosition).remove(animal);
                 animals.get(afterMovePosition).add(animal);
+                map.mapChangedEmit("Zwierzę przesunęło się z " + prevMovePosition + " do " + afterMovePosition);
             }
         }
     }
@@ -66,6 +66,7 @@ public class Simulation{
                 }
                 maxEnergyAnimal.increaseEnergyLevel(plantEnergy);
                 plants.remove(maxEnergyAnimal.getPosition());
+                map.mapChangedEmit("Zwierze z pozycji: " + maxEnergyAnimal.getPosition() + " zjadlo rosline");
             }
         }
     }
@@ -96,6 +97,7 @@ public class Simulation{
                     Animal newAnimal = firstCandidateToReproduce.reproduceAnimal(secondCandidateToReproduce,reproducingEnergy,
                             minimalMutationNumber,maximalMutationNumber);
                     animals.get(newAnimal.getPosition()).add(newAnimal);
+                    map.mapChangedEmit("Powstało nowe zwierze na pozycji: " + newAnimal.getPosition());
                 }
             }
         }
