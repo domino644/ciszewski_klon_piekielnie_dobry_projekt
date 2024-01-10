@@ -14,20 +14,25 @@ public class AnimalEats {
         this.plantEnergy = simulationParameters.plantEnergy();
     }
 
+    private Animal findStrongestAnimal(ArrayList<Animal> animalsOnPosition){
+        Animal maxEnergyAnimal;
+        maxEnergyAnimal = animalsOnPosition.get(0);
+        for (Animal animal : animalsOnPosition) {
+            if (ANIMAL_COMPARATOR.compare(maxEnergyAnimal, animal) > 0){
+                maxEnergyAnimal = animal;
+            }
+        }
+        return maxEnergyAnimal;
+    }
+
     public void animalEats(){
         HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
-        HashMap<Vector2d,Plant> plants = map.getPlants();
         Animal maxEnergyAnimal;
         for (ArrayList<Animal> list : animals.values()) {
             if (!list.isEmpty() && map.plantAt(list.get(0).getPosition()) != null){
-                maxEnergyAnimal = list.get(0);
-                for (Animal animal : list) {
-                    if (ANIMAL_COMPARATOR.compare(maxEnergyAnimal, animal) > 0){
-                        maxEnergyAnimal = animal;
-                    }
-                }
+                maxEnergyAnimal = findStrongestAnimal(list);
                 maxEnergyAnimal.increaseEnergyLevel(plantEnergy);
-                plants.remove(maxEnergyAnimal.getPosition());
+                map.getPlants().remove(maxEnergyAnimal.getPosition());
                 map.mapChangedEmit("Zwierze z pozycji: " + maxEnergyAnimal.getPosition() + " zjadlo rosline");
             }
         }

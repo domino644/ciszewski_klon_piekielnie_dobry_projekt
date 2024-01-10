@@ -1,7 +1,9 @@
 package model;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class AnimalReproducing {
 
@@ -20,36 +22,53 @@ public class AnimalReproducing {
         reproducingEnergy = simulationParameters.reproducingEnergy();
     }
 
-    public void animalReproducing(){
-        HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
+    private Optional<Animal[]> findPairToReproducing(ArrayList<Animal> animalOnPositionList){
         Animal firstCandidateToReproduce;
         Animal secondCandidateToReproduce;
-        for (ArrayList<Animal> list : animals.values()) {
-            if (list.size() > 1){
-                if (ANIMAL_COMPARATOR.compare(list.get(0),list.get(1)) < 0){
-                    firstCandidateToReproduce = list.get(0);
-                    secondCandidateToReproduce = list.get(1);
-                } else {
-                    firstCandidateToReproduce = list.get(1);
-                    secondCandidateToReproduce = list.get(0);
-                }
-                for (Animal animal : list) {
-                    if (ANIMAL_COMPARATOR.compare(firstCandidateToReproduce, animal) > 0){
-                        firstCandidateToReproduce = animal;
-                    }
-                }
-                for (Animal animal : list) {
-                    if (animal != firstCandidateToReproduce && ANIMAL_COMPARATOR.compare(firstCandidateToReproduce, animal) > 0){
-                        secondCandidateToReproduce = animal;
-                    }
-                }
-                if (secondCandidateToReproduce.getEnergyLevel() > minimalEnergyToReproduction){
-                    Animal newAnimal = firstCandidateToReproduce.reproduceAnimal(secondCandidateToReproduce,reproducingEnergy,
-                            minimalMutationNumber,maximalMutationNumber);
-                    animals.get(newAnimal.getPosition()).add(newAnimal);
-                    map.mapChangedEmit("Powstało nowe zwierze na pozycji: " + newAnimal.getPosition());
-                }
+        if (ANIMAL_COMPARATOR.compare(animalOnPositionList.get(0),animalOnPositionList.get(1)) < 0){
+            firstCandidateToReproduce = animalOnPositionList.get(0);
+            secondCandidateToReproduce = animalOnPositionList.get(1);
+        } else {
+            firstCandidateToReproduce = animalOnPositionList.get(1);
+            secondCandidateToReproduce = animalOnPositionList.get(0);
+        }
+        for (Animal animal : animalOnPositionList) {
+            if (ANIMAL_COMPARATOR.compare(firstCandidateToReproduce, animal) > 0){
+                firstCandidateToReproduce = animal;
             }
+        }
+        for (Animal animal : animalOnPositionList) {
+            if (animal != firstCandidateToReproduce && ANIMAL_COMPARATOR.compare(firstCandidateToReproduce, animal) > 0){
+                secondCandidateToReproduce = animal;
+            }
+        }
+        return Optional.of(new Animal[]{firstCandidateToReproduce,secondCandidateToReproduce});
+    }
+
+    private void reproduceIfItPossible(Optional<Animal[]> pair){
+        if (pair.isPresent()){
+            Animal firstCandidateToReproduce = pair.get()[0];
+            Animal secondCandidateToReproduce = pair.get()[1];
+            if (secondCandidateToReproduce.getEnergyLevel() > minimalEnergyToReproduction){
+                Animal newAnimal = firstCandidateToReproduce.reproduceAnimal(secondCandidateToReproduce,reproducingEnergy,
+                        minimalMutationNumber,maximalMutationNumber);
+                map.getAnimals().get(newAnimal.getPosition()).add(newAnimal);
+                map.mapChangedEmit("Powstało nowe zwierze na pozycji: " + newAnimal.getPosition());
+            }
+        }
+    }
+
+    private void reproducingOnPosition(ArrayList<Animal> animalOnPositionList){
+        if (animalOnPositionList.size() > 1){
+            Optional<Animal[]> pairToReproduce = findPairToReproducing(animalOnPositionList);
+            reproduceIfItPossible(pairToReproduce);
+        }
+    }
+
+    public void animalReproducing(){
+        HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
+        for (ArrayList<Animal> list : animals.values()) {
+            reproducingOnPosition(list);
         }
     }
 }

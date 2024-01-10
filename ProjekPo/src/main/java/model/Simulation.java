@@ -43,7 +43,7 @@ public class Simulation implements Runnable{
     @Override
     public void run() {
         try {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 10; i++) {
                 System.out.println("Day: " + i);
                 this.dailyMapChange();
                 System.out.println(mapVisualizer.draw(map.getLowerBoundary(), map.getUpperBoundary()));
