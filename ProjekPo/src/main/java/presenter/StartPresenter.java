@@ -6,9 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.RandomVectorGenerator;
-import model.Simulation;
-import model.WorldMap;
+import model.*;
 
 import java.io.IOException;
 public class StartPresenter {
@@ -58,7 +56,7 @@ public class StartPresenter {
         stage.setTitle("Darwin world # " + simulationCount);
         stage.minWidthProperty().bind(viewRoot.minWidthProperty());
         stage.minHeightProperty().bind(viewRoot.minHeightProperty());
-        WorldMap map = new WorldMap(widthSpinner.getValue(),
+        SimulationInitialize simulationInitialize = new SimulationInitialize(widthSpinner.getValue(),
                 heightSpinner.getValue(),
                 numberOfAnimalsSpinner.getValue(),
                 numberOfPlantsSpinner.getValue(),
@@ -71,10 +69,11 @@ public class StartPresenter {
                 genomeLengthSpinner.getValue(),
                 plantEnergySpinner.getValue(),
                 lostEnergyPerDaySpinner.getValue());
-        RandomVectorGenerator randomGenerator = new RandomVectorGenerator(widthSpinner.getValue(), heightSpinner.getValue());
-        Simulation simulation = new Simulation(map,numberOfPlantsGrowPerDaySpinner.getValue(), minimalEnergyToReproductionSpinner.getValue(), reproducingEnergySpinner.getValue(), minimalMutationNumberSpinner.getValue(), maximalMutationNumberSpinner.getValue(), plantEnergySpinner.getValue(), randomGenerator, lostEnergyPerDaySpinner.getValue());
+        WorldMap map = simulationInitialize.getWorldMap();
+        Simulation simulation = simulationInitialize.getSimulation();
         simulationCount++;
         presenter.setWorldMap(map);
+        presenter.setWorldSimulation(simulation);
         map.addListener(presenter);
         stage.show();
     }

@@ -8,37 +8,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class WorldMap implements MoveValidator, Runnable {
+public class WorldMap implements MoveValidator {
     private final Vector2d lowerBoundary = new Vector2d(0, 0);
     private final Vector2d upperBoundary;
     private final HashMap<Vector2d, ArrayList<Animal>> animals = new HashMap<>();
     private final HashMap<Vector2d, Plant> plants = new HashMap<>();
     private final RandomVectorGenerator randomVectorGenerator;
-    private final Simulation simulation;
     private final ArrayList<MapChangeListener> listeners = new ArrayList<>();
 
 
-    public WorldMap(int width, int height, int numberOfAnimals, int numberOfPlants,
-                    int numberOfPlantsGrowPerDay, int startAnimalEnergy, int minimalEnergyToReproduction,
-                    int reproducingEnergy, int minimalMutationNumber, int maximalMutationNumber,
-                    int genomeLength, int plantEnergy, int lostEnergyPerDay) {
-        if (width <= 0 || height <= 0) {
+    public WorldMap(WorldParameters worldParameters) {
+        if (worldParameters.height() <= 0 || worldParameters.width() <= 0) {
             throw new IllegalArgumentException("Width and height of map have to be greater than 0");
         }
-        randomVectorGenerator = new RandomVectorGenerator(width, height);
-        Vector2d[] animalsPositions = randomVectorGenerator.RandomVectorAnimal(numberOfAnimals).toArray(new Vector2d[0]);
-        Vector2d[] plantsPositions = randomVectorGenerator.RandomVectorGrass(new Vector2d[0], numberOfPlants).toArray(new Vector2d[0]);
-        this.upperBoundary = new Vector2d(width, height);
+        randomVectorGenerator = new RandomVectorGenerator(worldParameters.width(), worldParameters.height());
+        Vector2d[] animalsPositions = randomVectorGenerator.RandomVectorAnimal(worldParameters.numberOfAnimals()).toArray(new Vector2d[0]);
+        Vector2d[] plantsPositions = randomVectorGenerator.RandomVectorGrass(new Vector2d[0], worldParameters.numberOfPlants()).toArray(new Vector2d[0]);
+        this.upperBoundary = new Vector2d(worldParameters.width(), worldParameters.height());
         prepareLists();
         for (Vector2d v : animalsPositions) {
-            animals.get(v).add(new Animal(v, genomeLength, startAnimalEnergy));
+            animals.get(v).add(new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy()));
         }
         for (Vector2d v : plantsPositions) {
             plants.put(v, new Plant(v));
         }
-        simulation = new Simulation(this, numberOfPlantsGrowPerDay, minimalEnergyToReproduction
-                , reproducingEnergy, minimalMutationNumber, maximalMutationNumber, plantEnergy
-                , randomVectorGenerator, lostEnergyPerDay);
     }
 
     private void prepareLists() {
@@ -112,19 +105,8 @@ public class WorldMap implements MoveValidator, Runnable {
         return upperBoundary;
     }
 
-    @Override
-    public void run() {
-        MapVisualizer vis = new MapVisualizer(this);
-        try {
-            for (int i = 0; i < 10; i++) {
-                System.out.println("Day: " + i);
-                simulation.dailyMapChange();
-                System.out.println(vis.draw(this.lowerBoundary, this.upperBoundary));
-                Thread.sleep(500);
-            }
-        }catch (InterruptedException e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException();
-        }
+    public RandomVectorGenerator getRandomVectorGenerator() {
+        return randomVectorGenerator;
     }
+
 }
