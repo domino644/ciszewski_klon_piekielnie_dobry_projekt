@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import model.Simulation;
 import model.SimulationEngine;
 import model.Vector2d;
 import model.WorldMap;
@@ -24,6 +25,7 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private Button startButton;
     private WorldMap map;
+    private Simulation simulation;
 
     static final int CELL_WIDTH = 30;
     static final int CELL_HEIGHT = 30;
@@ -41,6 +43,10 @@ public class SimulationPresenter implements MapChangeListener {
         mapGrid.getChildren().add(gridCreator());
     }
 
+    public void setWorldSimulation(Simulation simulation) {
+        this.simulation = simulation;
+    }
+
     public void drawMap(){
         clearGrid();
         mapGrid.getChildren().add(gridCreator());
@@ -49,8 +55,8 @@ public class SimulationPresenter implements MapChangeListener {
     private GridPane gridCreator(){
         Vector2d lowerBoundary = map.getLowerBoundary();
         Vector2d upperBoundary = map.getUpperBoundary();
-        int numberColumns = upperBoundary.getX() - lowerBoundary.getX()+1;
-        int numberRows = upperBoundary.getY() - lowerBoundary.getY()+1;
+        int numberColumns = upperBoundary.getX() - lowerBoundary.getX();
+        int numberRows = upperBoundary.getY() - lowerBoundary.getY();
         GridPane gridPane = new GridPane();
         Label label;
         int cordX,cordY;
@@ -91,7 +97,7 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void onSimulationStartClicked() {
-        SimulationEngine simulationEngine = new SimulationEngine(Collections.singletonList(map),1);
+        SimulationEngine simulationEngine = new SimulationEngine(Collections.singletonList(simulation),1);
         simulationEngine.runAsyncNoWait();
         startButton.setDisable(true);
 

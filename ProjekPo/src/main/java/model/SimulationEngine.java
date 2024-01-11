@@ -7,20 +7,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SimulationEngine {
-    private final List<WorldMap> maps;
+    private final List<Simulation> simulations;
     private final List<Thread> threads = new ArrayList<>();
     private final ExecutorService executorService;
-    public SimulationEngine(List<WorldMap> maps, int numberOfThreadsInPool){
-        this.maps = maps;
+    public SimulationEngine(List<Simulation> simulations, int numberOfThreadsInPool){
+        this.simulations = simulations;
         executorService = Executors.newFixedThreadPool(numberOfThreadsInPool);
-        for(WorldMap map : maps){
-            threads.add(new Thread(map));
+        for(Simulation simulation : simulations){
+            threads.add(new Thread(simulation));
         }
     }
 
     public void runSync(){
-        for(WorldMap map : maps){
-            map.run();
+        for(Simulation simulation : simulations){
+            simulation.run();
         }
     }
 
@@ -45,8 +45,8 @@ public class SimulationEngine {
     }
 
     public void runAsyncInThreadPool() throws InterruptedException {
-        for(WorldMap map : maps) {
-            executorService.submit(map); // task runanble wywoła się na jednym z 8 wątków lub poczeka, aż któryś się zwolni
+        for(Simulation simulation : simulations) {
+            executorService.submit(simulation); // task runanble wywoła się na jednym z 8 wątków lub poczeka, aż któryś się zwolni
         }
         awaitSimulationEnd();
     }
