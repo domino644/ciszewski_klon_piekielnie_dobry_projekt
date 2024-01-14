@@ -28,10 +28,13 @@ public class WorldMap implements MoveValidator {
         this.upperBoundary = new Vector2d(worldParameters.width(), worldParameters.height());
         prepareLists();
         for (Vector2d v : animalsPositions) {
-            animals.get(v).add(new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy()));
+            Animal a = new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy());
+            animals.get(v).add(a);
+            statsKeeper.animalBorn(a);
         }
         for (Vector2d v : plantsPositions) {
             plants.put(v, new Plant(v));
+            statsKeeper.plantGrown(v);
         }
     }
 

@@ -134,4 +134,12 @@ public class StatsKeeper {
         return output;
     }
 
+    public int getNumberOfAliveAnimals(){
+        return aliveAnimals.size();
+    }
+
+    public int getNumberOfDeadAnimals(){
+        return deadAnimals.size();
+    }
+
 }
