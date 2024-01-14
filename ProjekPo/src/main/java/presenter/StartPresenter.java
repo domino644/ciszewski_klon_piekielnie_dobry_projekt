@@ -70,8 +70,10 @@ public class StartPresenter {
                 plantEnergySpinner.getValue(),
                 lostEnergyPerDaySpinner.getValue());
         WorldMap map = simulationInitialize.getWorldMap();
+        WorldElementBox worldElementBox = new WorldElementBox(startAnimalEnergySpinner.getValue(),map);
         Simulation simulation = simulationInitialize.getSimulation();
         simulationCount++;
+        presenter.setWorldElementBox(worldElementBox);
         presenter.setWorldMap(map);
         presenter.setWorldSimulation(simulation);
         map.addListener(presenter);

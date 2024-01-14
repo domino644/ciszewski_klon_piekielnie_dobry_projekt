@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Simulation;
 import model.SimulationEngine;
@@ -27,8 +28,11 @@ public class SimulationPresenter implements MapChangeListener {
     private Button startButton;
     private WorldMap map;
     private Simulation simulation;
-    static final int GRID_WIDTH = 600;
-    static final int GRID_HEIGHT = 600;
+    private WorldElementBox worldElementBox;
+    private static final int GRID_WIDTH = 500;
+    private static final int GRID_HEIGHT = 500;
+    private float cellWidth;
+    private float cellHeight;
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
@@ -40,11 +44,22 @@ public class SimulationPresenter implements MapChangeListener {
 
     public void setWorldMap(WorldMap map) {
         this.map = map;
+        Vector2d lowerBoundary = map.getLowerBoundary();
+        Vector2d upperBoundary = map.getUpperBoundary();
+        int numberColumns = upperBoundary.getX() - lowerBoundary.getX();
+        int numberRows = upperBoundary.getY() - lowerBoundary.getY();
+        cellWidth = (float) GRID_WIDTH / numberColumns;
+        cellHeight = (float) GRID_HEIGHT / numberRows;
         mapGrid.getChildren().add(gridCreator());
+        this.worldElementBox = worldElementBox;
     }
 
     public void setWorldSimulation(Simulation simulation) {
         this.simulation = simulation;
+    }
+
+    public void setWorldElementBox(WorldElementBox worldElementBox) {
+        this.worldElementBox = worldElementBox;
     }
 
     public void drawMap() {
@@ -57,8 +72,6 @@ public class SimulationPresenter implements MapChangeListener {
         Vector2d upperBoundary = map.getUpperBoundary();
         int numberColumns = upperBoundary.getX() - lowerBoundary.getX();
         int numberRows = upperBoundary.getY() - lowerBoundary.getY();
-        float cellWidth = (float) GRID_WIDTH / numberColumns;
-        float cellHeight = (float) GRID_HEIGHT / numberRows;
         GridPane gridPane = new GridPane();
         Label label;
         int cordX, cordY;
@@ -89,12 +102,13 @@ public class SimulationPresenter implements MapChangeListener {
             for (int j = 0; j < numberColumns; j++) {
                 cordY = lowerBoundary.getY() + i;
                 cordX = lowerBoundary.getX() + j;
-                String element = map.objectAt(new Vector2d(cordX, cordY));
-                label = new Label(Objects.requireNonNullElse(element, " "));
-                adjustedFontSize = FontResizer.calculateOptimalFontSize(label.getText(),label.getFont(),cellWidth);
-                label.setFont(new Font(adjustedFontSize));
-                gridPane.add(label, j + 1, numberRows - i);
-                GridPane.setHalignment(label, HPos.CENTER);
+//                String element = map.objectAt(new Vector2d(cordX, cordY));
+//                label = new Label(Objects.requireNonNullElse(element, " "));
+//                adjustedFontSize = FontResizer.calculateOptimalFontSize(label.getText(),label.getFont(),cellWidth);
+//                label.setFont(new Font(adjustedFontSize));
+                VBox vBox = worldElementBox.createVbox(new Vector2d(cordX, cordY),cellWidth,cellHeight);
+                gridPane.add(vBox, j + 1, numberRows - i);
+                GridPane.setHalignment(vBox, HPos.CENTER);
             }
         }
         gridPane.setGridLinesVisible(true);
