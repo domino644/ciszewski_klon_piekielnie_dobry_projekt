@@ -1,11 +1,13 @@
 package presenter;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.*;
 
 import java.io.IOException;
@@ -77,6 +79,15 @@ public class StartPresenter {
         presenter.setWorldMap(map);
         presenter.setWorldSimulation(simulation);
         map.addListener(presenter);
+        stage.setOnCloseRequest(event -> handleCloseRequest(event,simulation));
         stage.show();
     }
+
+    private void handleCloseRequest(WindowEvent event,Simulation simulation){
+        System.out.println("Close Simulation");
+        simulation.setSimulationPlay(false);
+        simulation.setKillSimulation(true);
+    }
+
+
 }

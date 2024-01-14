@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import model.Simulation;
 import model.SimulationEngine;
 import model.Vector2d;
@@ -26,6 +27,8 @@ public class SimulationPresenter implements MapChangeListener {
     private GridPane mapGrid;
     @FXML
     private Button startButton;
+    @FXML
+    private Button stopButton;
     private WorldMap map;
     private Simulation simulation;
     private WorldElementBox worldElementBox;
@@ -116,10 +119,17 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void onSimulationStartClicked() {
+        simulation.setSimulationPlay(true);
         SimulationEngine simulationEngine = new SimulationEngine(Collections.singletonList(simulation), 1);
         simulationEngine.runAsyncNoWait();
         startButton.setDisable(true);
+        stopButton.setDisable(false);
+    }
 
+    public void onSimulationStopClicked() {
+        simulation.setSimulationPlay(false);
+        startButton.setDisable(false);
+        stopButton.setDisable(true);
     }
 
     private void clearGrid() {

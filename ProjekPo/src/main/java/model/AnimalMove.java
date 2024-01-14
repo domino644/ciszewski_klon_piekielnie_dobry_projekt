@@ -12,23 +12,20 @@ public class AnimalMove {
         this.map = map;
         lossEnergyPerDay = simulationParameters.lostEnergyPerDay();
     }
-    private void oneAnimalMove(Animal animal){
+   public void animalMoves(ArrayList<Animal> animalsOnBoard){
         HashMap<Vector2d,ArrayList<Animal>> animals = map.getAnimals();
         Vector2d prevMovePosition;
         Vector2d afterMovePosition;
-        prevMovePosition = animal.getPosition();
-        animal.move(map);
-        animal.decreaseEnergyLevel(lossEnergyPerDay);
-        afterMovePosition = animal.getPosition();
-        if (prevMovePosition != afterMovePosition) {
-            animals.get(prevMovePosition).remove(animal);
-            animals.get(afterMovePosition).add(animal);
-            map.mapChangedEmit("Zwierzę przesunęło się z " + prevMovePosition + " do " + afterMovePosition);
-        }
-    }
-    public void animalMoves(ArrayList<Animal> animalsOnBoard){
         for (Animal animal : animalsOnBoard) {
-            oneAnimalMove(animal);
+            prevMovePosition = animal.getPosition();
+            animal.move(map);
+            animal.decreaseEnergyLevel(lossEnergyPerDay);
+            afterMovePosition = animal.getPosition();
+            if (prevMovePosition != afterMovePosition){
+                animals.get(prevMovePosition).remove(animal);
+                animals.get(afterMovePosition).add(animal);
+                map.mapChangedEmit("");
+            }
         }
     }
 }
