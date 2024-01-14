@@ -20,6 +20,10 @@ public class RandomVectorGenerator implements GetRandomVector {
         randomGrass = new RandomGrass(width, height);
     }
 
+    public void setRandomSeed(int seed){
+        random.setSeed(seed);
+    }
+
     @Override
     public Vector2d RandomVector(){
         return new Vector2d(random.nextInt(width), random.nextInt(height));
@@ -32,19 +36,6 @@ public class RandomVectorGenerator implements GetRandomVector {
         }
         return result;
     }
-
-    private void completeDataInArray(ArrayList<Integer> arrayList,int bottomRowList, int topRowList,Vector2d[] occupiedPositions){
-        for (int i = bottomRowList*width; i < topRowList*width; i++) {
-            int finalI = i;
-            boolean exist = Arrays.stream(occupiedPositions).anyMatch(val -> (val.getX()+val.getY()*width) == finalI);
-            if (!exist){
-                arrayList.add(i);
-            }
-        }
-
-    }
-
-
 
     public ArrayList<Vector2d> RandomVectorGrass(Vector2d[] occupiedPositions,int n){
         return randomGrass.RandomVectorGrass(occupiedPositions, n);

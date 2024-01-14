@@ -74,6 +74,10 @@ public class RandomGrass {
         }
     }
 
+    public void setRandomSeed(int seed){
+        random.setSeed(seed);
+    }
+
     public ArrayList<Vector2d> RandomVectorGrass(Vector2d[] occupiedPositions, int n){
         result = new ArrayList<>();
         bottomTopGrass = new ArrayList<>();
