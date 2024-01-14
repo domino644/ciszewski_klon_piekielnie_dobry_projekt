@@ -21,6 +21,10 @@ public class Genotype {
         this.genes = genes.stream().mapToInt(Integer::intValue).toArray();
     }
 
+    public void setRandomSeed(int seed){
+        random.setSeed(seed);
+    }
+
     public int[] getGenes() {
         return genes.clone();
     }
