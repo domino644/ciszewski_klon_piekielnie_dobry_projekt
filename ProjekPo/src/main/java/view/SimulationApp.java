@@ -1,9 +1,11 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class SimulationApp extends javafx.application.Application{
     @Override
@@ -21,5 +23,13 @@ public class SimulationApp extends javafx.application.Application{
         primaryStage.setTitle("Darwin World Launcher");
         primaryStage.minWidthProperty().bind(viewRoot.minWidthProperty());
         primaryStage.minHeightProperty().bind(viewRoot.minHeightProperty());
+        primaryStage.setOnCloseRequest(this::handleCloseRequest);
     }
+
+    private void handleCloseRequest(WindowEvent event){
+        System.out.println("Close Apllication");
+        Platform.exit();
+        System.exit(0);
+    }
+
 }

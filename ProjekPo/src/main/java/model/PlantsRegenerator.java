@@ -20,5 +20,6 @@ public class PlantsRegenerator {
             plants.put(vector2d,new Plant(vector2d));
             map.getStatsKeeper().plantGrown(vector2d);
         }
+        map.mapChangedEmit("");
     }
 }

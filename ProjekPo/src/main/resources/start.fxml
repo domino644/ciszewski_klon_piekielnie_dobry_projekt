@@ -46,7 +46,7 @@
             </HBox>
                     <Label text="Lost energy per day"/>
                     <Spinner fx:id="lostEnergyPerDaySpinner" editable="true" max="100" initialValue="3"/>
-            <Button text="Start" onAction="#simulationStart"/>
+            <Button text="Generate Simulation" onAction="#simulationStart"/>
         </VBox>
     </center>
 </BorderPane>
