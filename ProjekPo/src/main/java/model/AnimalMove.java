@@ -12,8 +12,7 @@ public class AnimalMove {
         this.map = map;
         lossEnergyPerDay = simulationParameters.lostEnergyPerDay();
     }
-
-    public void animalMoves(ArrayList<Animal> animalsOnBoard){
+   public void animalMoves(ArrayList<Animal> animalsOnBoard){
         HashMap<Vector2d,ArrayList<Animal>> animals = map.getAnimals();
         Vector2d prevMovePosition;
         Vector2d afterMovePosition;
