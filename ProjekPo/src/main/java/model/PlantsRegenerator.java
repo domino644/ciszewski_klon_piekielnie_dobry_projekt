@@ -19,5 +19,6 @@ public class PlantsRegenerator {
         for (Vector2d vector2d : newGrassPosition){
             plants.put(vector2d,new Plant(vector2d));
         }
+        map.mapChangedEmit("");
     }
 }

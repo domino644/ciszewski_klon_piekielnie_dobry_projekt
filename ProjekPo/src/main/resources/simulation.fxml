@@ -11,6 +11,7 @@
         <HBox alignment="BASELINE_CENTER">
             <Label fx:id="messageLabel"/>
             <Button fx:id="startButton" text="Start" textAlignment="CENTER" onAction="#onSimulationStartClicked"/>
+            <Button fx:id="stopButton" text="Stop" textAlignment="CENTER" onAction="#onSimulationStopClicked" disable="true"/>
         </HBox>
     </top>
     <center>

@@ -25,7 +25,7 @@ public class AnimalMove {
             if (prevMovePosition != afterMovePosition){
                 animals.get(prevMovePosition).remove(animal);
                 animals.get(afterMovePosition).add(animal);
-                map.mapChangedEmit("Zwierzę przesunęło się z " + prevMovePosition + " do " + afterMovePosition);
+                map.mapChangedEmit("");
             }
         }
     }

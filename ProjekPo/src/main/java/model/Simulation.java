@@ -12,6 +12,8 @@ public class Simulation implements Runnable{
     private final AnimalReproducing animalReproducing;
     private final AnimalClear animalClear;
     private final PlantsRegenerator plantsRegenerator;
+    private boolean simulationPlay = false;
+    private boolean killSimulation = false;
 
     public Simulation (WorldMap map,SimulationParameters simulationParameters){
         this.map = map;
@@ -42,16 +44,25 @@ public class Simulation implements Runnable{
 
     @Override
     public void run() {
-        try {
-            for (int i = 0; i < 10; i++) {
-                System.out.println("Day: " + i);
-                this.dailyMapChange();
-                System.out.println(mapVisualizer.draw(map.getLowerBoundary(), map.getUpperBoundary()));
-                Thread.sleep(500);
+        while (!killSimulation) {
+            try {
+                while (simulationPlay) {
+                    this.dailyMapChange();
+                    System.out.println(mapVisualizer.draw(map.getLowerBoundary(), map.getUpperBoundary()));
+                    Thread.sleep(500);
+                }
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+                throw new RuntimeException();
             }
-        }catch (InterruptedException e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException();
         }
+    }
+
+    public void setSimulationPlay(boolean simulationPlay) {
+        this.simulationPlay = simulationPlay;
+    }
+
+    public void setKillSimulation(boolean killSimulation) {
+        this.killSimulation = killSimulation;
     }
 }
