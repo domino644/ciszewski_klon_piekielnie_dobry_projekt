@@ -2,13 +2,11 @@ package presenter;
 
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 
 import javafx.scene.image.Image;
-import javafx.scene.text.Font;
 import model.Animal;
 import model.AnimalComparator;
 import model.Vector2d;
@@ -33,7 +31,7 @@ public class WorldElementBox {
     public WorldElementBox(int startEnergy,WorldMap map) {
         this.map = map;
         this.startEnergy = startEnergy;
-    };
+    }
     public VBox createVbox(Vector2d vector2d,float cellWidth,float cellHeight){
         VBox vBox;
         Image img = fileNameMatch(vector2d);
