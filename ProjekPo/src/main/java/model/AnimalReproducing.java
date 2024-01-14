@@ -54,6 +54,7 @@ public class AnimalReproducing {
                         minimalMutationNumber,maximalMutationNumber);
                 map.getAnimals().get(newAnimal.getPosition()).add(newAnimal);
                 map.mapChangedEmit("Powstało nowe zwierze na pozycji: " + newAnimal.getPosition());
+                map.getStatsKeeper().animalBorn(newAnimal);
             }
         }
     }

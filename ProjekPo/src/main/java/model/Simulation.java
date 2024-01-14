@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Simulation implements Runnable{
 
@@ -47,7 +46,10 @@ public class Simulation implements Runnable{
                 System.out.println("Day: " + i);
                 this.dailyMapChange();
                 System.out.println(mapVisualizer.draw(map.getLowerBoundary(), map.getUpperBoundary()));
+                System.out.println(map.getStatsKeeper().getNumberOfAliveAnimals());
+                System.out.println(map.getStatsKeeper().getNumberOfDeadAnimals());
                 Thread.sleep(500);
+
             }
         }catch (InterruptedException e){
             System.out.println(e.getMessage());

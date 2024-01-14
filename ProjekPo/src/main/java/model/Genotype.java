@@ -1,7 +1,5 @@
 package model;
 
-import enums.MapDirection;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -69,5 +67,16 @@ public class Genotype {
             throw new IndexOutOfBoundsException("Indeks wykracza poza tablice genotypu");
         }
         return genes[index];
+    }
+    @Override
+    public boolean equals(Object other){
+        if (this == other) return true;
+        if (other == null) return false;
+        if (getClass() != other.getClass()) return false;
+        if(((Genotype) other).getGeneLength() != getGeneLength()) return false;
+        for(int i = 0; i < getGeneLength(); i++){
+            if (geneAt(i) != ((Genotype) other).geneAt(i)) return false;
+        }
+        return true;
     }
 }
