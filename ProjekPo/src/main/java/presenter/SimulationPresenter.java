@@ -15,8 +15,8 @@ import model.SimulationEngine;
 import model.Vector2d;
 import model.WorldMap;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 public class SimulationPresenter implements MapChangeListener {
     @FXML
@@ -90,11 +90,7 @@ public class SimulationPresenter implements MapChangeListener {
                 cordY = lowerBoundary.getY() + i;
                 cordX = lowerBoundary.getX() + j;
                 String element = map.objectAt(new Vector2d(cordX, cordY));
-                if (element != null) {
-                    label = new Label(element);
-                } else {
-                    label = new Label(" ");
-                }
+                label = new Label(Objects.requireNonNullElse(element, " "));
                 adjustedFontSize = FontResizer.calculateOptimalFontSize(label.getText(),label.getFont(),cellWidth);
                 label.setFont(new Font(adjustedFontSize));
                 gridPane.add(label, j + 1, numberRows - i);
