@@ -34,6 +34,7 @@ public class AnimalEats {
                 maxEnergyAnimal.increaseEnergyLevel(plantEnergy);
                 map.getPlants().remove(maxEnergyAnimal.getPosition());
                 map.mapChangedEmit("Zwierze z pozycji: " + maxEnergyAnimal.getPosition() + " zjadlo rosline");
+                map.getStatsKeeper().plantEaten();
             }
         }
     }

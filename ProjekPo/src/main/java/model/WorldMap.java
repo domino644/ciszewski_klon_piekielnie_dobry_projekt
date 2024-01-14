@@ -15,6 +15,7 @@ public class WorldMap implements MoveValidator {
     private final HashMap<Vector2d, Plant> plants = new HashMap<>();
     private final RandomVectorGenerator randomVectorGenerator;
     private final ArrayList<MapChangeListener> listeners = new ArrayList<>();
+    private final StatsKeeper statsKeeper = new StatsKeeper(this);
 
 
     public WorldMap(WorldParameters worldParameters) {
@@ -32,6 +33,10 @@ public class WorldMap implements MoveValidator {
         for (Vector2d v : plantsPositions) {
             plants.put(v, new Plant(v));
         }
+    }
+
+    public StatsKeeper getStatsKeeper() {
+        return statsKeeper;
     }
 
     private void prepareLists() {

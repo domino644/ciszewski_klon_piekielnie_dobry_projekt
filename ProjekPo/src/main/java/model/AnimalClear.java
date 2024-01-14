@@ -16,6 +16,7 @@ public class AnimalClear {
         for (Animal animal : animalsOnBoard) {
             if (animal.getEnergyLevel() < 0) {
                 animals.get(animal.getPosition()).remove(animal);
+                map.getStatsKeeper().animalDied(animal);
             }
         }
     }
