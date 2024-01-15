@@ -12,6 +12,7 @@
         <HBox alignment="BASELINE_CENTER">
             <Label fx:id="messageLabel"/>
             <Button fx:id="startButton" text="Start" textAlignment="CENTER" onAction="#onSimulationStartClicked"/>
+
             <Button fx:id="stopButton" text="Stop" textAlignment="CENTER" onAction="#onSimulationStopClicked" disable="true"/>
             <Button fx:id="trackButton" text="Track" textAlignment="CENTER" onAction="#trackAnimal"/>
         </HBox>
@@ -22,4 +23,42 @@
             <GridPane fx:id="gridAnimalStats" gridLinesVisible="true" alignment="CENTER_RIGHT"/>
         </HBox>
     </center>
+    <bottom>
+        <VBox alignment="CENTER" spacing="10">
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER">
+                    <Label text="Liczba zwierząt"/>
+                    <Label fx:id="animalQuantityLabel"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label text="Liczba roślin"/>
+                    <Label fx:id="plantQuantityLabel"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label text="Liczba wolnych pól"/>
+                    <Label fx:id="freeFieldsQuantityLabel"/>
+                </VBox>
+            </HBox>
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER">
+                    <Label text="Średni poziom energii"/>
+                    <Label fx:id="averageEnergyLevelLabel"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label text="Średnia długość życia"/>
+                    <Label fx:id="averageLifetimeLabel"/>
+                </VBox>
+                <VBox alignment="CENTER">
+                    <Label text="Średnia liczba dzieci"/>
+                    <Label fx:id="averageNumberOfKidsLabel"/>
+                </VBox>
+            </HBox>
+            <HBox alignment="CENTER">
+                <VBox alignment="CENTER">
+                    <Label text="Najpopularniejszy genotyp"/>
+                    <Label fx:id="mostPopularGenotypeLabel"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </bottom>
 </BorderPane>
