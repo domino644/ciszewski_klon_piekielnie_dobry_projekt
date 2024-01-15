@@ -3,7 +3,6 @@ package model.simulation;
 import model.records.SimulationParameters;
 import model.WorldMap;
 import model.records.WorldParameters;
-import presenter.utils.JSONHandler;
 
 public class SimulationInitialize {
 
