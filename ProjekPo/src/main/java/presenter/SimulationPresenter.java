@@ -12,15 +12,26 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.Simulation;
-import model.SimulationEngine;
-import model.Vector2d;
-import model.WorldMap;
+import model.*;
 
 import java.util.Collections;
 import java.util.Objects;
 
 public class SimulationPresenter implements MapChangeListener {
+    @FXML
+    private Label animalQuantityLabel;
+    @FXML
+    private Label plantQuantityLabel;
+    @FXML
+    private Label freeFieldsQuantityLabel;
+    @FXML
+    private Label mostPopularGenotypeLabel;
+    @FXML
+    private Label averageEnergyLevelLabel;
+    @FXML
+    private Label averageLifetimeLabel;
+    @FXML
+    private Label averageNumberOfKidsLabel;
     @FXML
     private Label messageLabel;
     @FXML
@@ -42,6 +53,7 @@ public class SimulationPresenter implements MapChangeListener {
         Platform.runLater(() -> {
             drawMap();
             messageLabel.setText(message);
+            updateStats();
         });
     }
 
@@ -136,5 +148,17 @@ public class SimulationPresenter implements MapChangeListener {
         mapGrid.getChildren().retainAll();
         mapGrid.getColumnConstraints().clear();
         mapGrid.getRowConstraints().clear();
+    }
+
+    private void updateStats(){
+        StatsKeeper statsKeeper = map.getStatsKeeper();
+        animalQuantityLabel.setText(String.valueOf(statsKeeper.getNumberOfAliveAnimals()));
+        plantQuantityLabel.setText(String.valueOf(statsKeeper.getNumberOfPlants()));
+        freeFieldsQuantityLabel.setText(String.valueOf(statsKeeper.getNumberOfFreeFields()));
+        if (statsKeeper.getMostPopularGenotype() != null){
+        mostPopularGenotypeLabel.setText(statsKeeper.getMostPopularGenotype().toString());}
+        averageEnergyLevelLabel.setText(String.valueOf(statsKeeper.getAverageEnergyLevel()));
+        averageLifetimeLabel.setText(String.valueOf(statsKeeper.getAverageLifetime()));
+        averageNumberOfKidsLabel.setText(String.valueOf(statsKeeper.getAvgNumberOfKids()));
     }
 }
