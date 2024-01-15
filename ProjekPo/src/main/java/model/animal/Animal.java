@@ -3,7 +3,9 @@ package model.animal;
 import enums.MapDirection;
 import interfaces.MoveValidator;
 import interfaces.MoveableWorldElement;
+import model.AnimalStatistic;
 import model.Genotype;
+import model.NewAnimalProductionProcess;
 import model.Vector2d;
 
 import java.util.ArrayList;

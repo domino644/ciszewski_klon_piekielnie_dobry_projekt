@@ -3,6 +3,7 @@ package model;
 import interfaces.MapChangeListener;
 import interfaces.MoveValidator;
 import model.animal.Animal;
+import model.animal.AnimalComparator;
 import model.plant.Plant;
 import model.records.WorldParameters;
 import model.utils.RandomVectorGenerator;

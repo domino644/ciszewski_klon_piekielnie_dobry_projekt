@@ -1,12 +1,14 @@
 package model;
 
+import model.animal.Animal;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class NewAnimalProductionProcess {
 
-    public static Animal reproduceAnimal(Animal animalStronger,Animal animal,int reproducingEnergy,
-                                  int minimalMutationNumber,int maximalMutationNumber,int date){
+    public static Animal reproduceAnimal(Animal animalStronger, Animal animal, int reproducingEnergy,
+                                         int minimalMutationNumber, int maximalMutationNumber, int date){
         Random random= new Random();
         Genotype genotype1 = prepareGenotype(animalStronger,animal);
         animalStronger.decreaseEnergyLevel(reproducingEnergy);
