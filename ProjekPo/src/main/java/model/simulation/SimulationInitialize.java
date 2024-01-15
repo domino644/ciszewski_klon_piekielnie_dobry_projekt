@@ -3,6 +3,7 @@ package model.simulation;
 import model.records.SimulationParameters;
 import model.WorldMap;
 import model.records.WorldParameters;
+import presenter.utils.JSONHandler;
 
 public class SimulationInitialize {
 
@@ -18,6 +19,7 @@ public class SimulationInitialize {
         SimulationParameters simulationParameters = new SimulationParameters(numberOfPlantsGrowPerDay,
                 minimalEnergyToReproduction, reproducingEnergy, minimalMutationNumber,
                 maximalMutationNumber, plantEnergy, lostEnergyPerDay);
+        JSONHandler.objectToFile(worldParameters,"test3");
         worldMap = new WorldMap(worldParameters);
         simulation = new Simulation(worldMap,simulationParameters);
     }

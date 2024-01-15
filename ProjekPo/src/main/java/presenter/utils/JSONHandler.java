@@ -10,7 +10,7 @@ import java.io.IOException;
 public class JSONHandler {
     public static boolean objectToFile(Object object, String filename){
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("configurations/" + filename);
+        File file = new File("ProjekPo/src/main/resources/configurations/" + filename);
         try{
         mapper.writeValue(file,object);
         return true;
@@ -22,7 +22,7 @@ public class JSONHandler {
 
     public static WorldParameters worldParametersFromFile(String filename){
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("configurations/"+filename);
+        File file = new File("ProjekPo/src/main/resources/configurations/"+filename);
         try {
             return mapper.readValue(file, WorldParameters.class);
         }catch(IOException e){
@@ -33,7 +33,7 @@ public class JSONHandler {
 
     public static SimulationParameters simulationParametersFromFile(String filename){
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("configurations/"+filename);
+        File file = new File("ProjekPo/src/main/resources/configurations/"+filename);
         try{
             return mapper.readValue(file, SimulationParameters.class);
         }catch(IOException e){
