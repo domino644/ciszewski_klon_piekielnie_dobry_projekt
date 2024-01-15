@@ -79,4 +79,15 @@ public class Genotype {
         }
         return true;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<");
+        for(int gene : genes){
+            stringBuilder.append(gene);
+        }
+        stringBuilder.append(">");
+        return stringBuilder.toString();
+    }
 }
