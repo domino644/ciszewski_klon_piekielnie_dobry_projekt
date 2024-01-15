@@ -1,9 +1,9 @@
 package model;
 
+import model.utils.RandomVectorGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 

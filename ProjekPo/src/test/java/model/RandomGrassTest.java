@@ -1,5 +1,6 @@
 package model;
 
+import model.utils.RandomGrass;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
