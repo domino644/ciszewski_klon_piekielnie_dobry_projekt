@@ -1,7 +1,5 @@
-import model.RandomVectorGenerator;
-import model.SimulationInitialize;
+import model.simulation.SimulationInitialize;
 import model.Vector2d;
-import model.WorldMap;
 
 public class World {
 

@@ -12,6 +12,10 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.*;
+import model.simulation.Simulation;
+import model.simulation.SimulationEngine;
+import presenter.components.WorldElementBox;
+import presenter.utils.FontResizer;
 
 import java.util.Collections;
 

@@ -2,6 +2,10 @@ package model;
 
 import interfaces.MapChangeListener;
 import interfaces.MoveValidator;
+import model.animal.Animal;
+import model.plant.Plant;
+import model.records.WorldParameters;
+import model.utils.RandomVectorGenerator;
 
 
 import java.util.ArrayList;
