@@ -12,7 +12,6 @@ import model.animal.AnimalComparator;
 import model.Vector2d;
 import model.WorldMap;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
@@ -22,12 +21,12 @@ public class WorldElementBox {
     private final WorldMap map;
     private final AnimalComparator ANIMAL_COMPARATOR = new AnimalComparator();
 
-    private static final Image LOW = new Image("low.png");
-    private static final Image SEMI = new Image("semi.png");
-    private static final Image MID = new Image("mid.png");
-    private static final Image MID_MORE = new Image("mid-more.png");
-    private static final Image FULL = new Image("full.png");
-    private static final Image GRASS = new Image("trawa.png");
+    private static final Image LOW = new Image("images/low.png");
+    private static final Image SEMI = new Image("images/semi.png");
+    private static final Image MID = new Image("images/mid.png");
+    private static final Image MID_MORE = new Image("images/mid-more.png");
+    private static final Image FULL = new Image("images/full.png");
+    private static final Image GRASS = new Image("images/trawa.png");
 
     public WorldElementBox(int startEnergy,WorldMap map) {
         this.map = map;
