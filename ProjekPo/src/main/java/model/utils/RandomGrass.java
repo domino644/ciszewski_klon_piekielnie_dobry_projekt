@@ -1,4 +1,6 @@
-package model;
+package model.utils;
+
+import model.Vector2d;
 
 import java.util.ArrayList;
 import java.util.Arrays;

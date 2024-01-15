@@ -1,4 +1,7 @@
-package model;
+package model.animal;
+
+import model.Vector2d;
+import model.WorldMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;

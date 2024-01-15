@@ -1,4 +1,4 @@
-package presenter;
+package presenter.components;
 
 
 import javafx.geometry.Pos;
@@ -7,8 +7,8 @@ import javafx.scene.layout.VBox;
 
 
 import javafx.scene.image.Image;
-import model.Animal;
-import model.AnimalComparator;
+import model.animal.Animal;
+import model.animal.AnimalComparator;
 import model.Vector2d;
 import model.WorldMap;
 

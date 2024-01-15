@@ -1,6 +1,7 @@
-package model;
+package model.plant;
 
 import interfaces.WorldElement;
+import model.Vector2d;
 
 public class Plant implements WorldElement {
     private final Vector2d position;

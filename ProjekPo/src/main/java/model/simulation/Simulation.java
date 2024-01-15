@@ -1,4 +1,10 @@
-package model;
+package model.simulation;
+
+import model.utils.MapVisualizer;
+import model.plant.PlantsRegenerator;
+import model.records.SimulationParameters;
+import model.WorldMap;
+import model.animal.*;
 
 import java.util.ArrayList;
 
@@ -14,7 +20,7 @@ public class Simulation implements Runnable{
     private boolean simulationPlay = false;
     private boolean killSimulation = false;
 
-    public Simulation (WorldMap map,SimulationParameters simulationParameters){
+    public Simulation (WorldMap map, SimulationParameters simulationParameters){
         this.map = map;
         this.mapVisualizer = new MapVisualizer(map);
         animalMove = new AnimalMove(map,simulationParameters);

@@ -1,5 +1,6 @@
-package model;
+package model.utils;
 
+import model.Vector2d;
 import model.WorldMap;
 
 public class MapVisualizer {

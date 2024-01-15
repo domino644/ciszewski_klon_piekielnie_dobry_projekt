@@ -1,4 +1,8 @@
-package model;
+package model.animal;
+
+import model.records.SimulationParameters;
+import model.Vector2d;
+import model.WorldMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +13,7 @@ public class AnimalEats {
     private final WorldMap map;
     private final int plantEnergy;
 
-    public AnimalEats(WorldMap map,SimulationParameters simulationParameters){
+    public AnimalEats(WorldMap map, SimulationParameters simulationParameters){
         this.map = map;
         this.plantEnergy = simulationParameters.plantEnergy();
     }
