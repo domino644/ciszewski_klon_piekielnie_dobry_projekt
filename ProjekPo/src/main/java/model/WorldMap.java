@@ -16,6 +16,7 @@ public class WorldMap implements MoveValidator {
     private final RandomVectorGenerator randomVectorGenerator;
     private final ArrayList<MapChangeListener> listeners = new ArrayList<>();
     private final StatsKeeper statsKeeper = new StatsKeeper(this);
+    private static final AnimalComparator ANIMAL_COMPARATOR = new AnimalComparator();
 
 
     public WorldMap(WorldParameters worldParameters) {
@@ -28,7 +29,7 @@ public class WorldMap implements MoveValidator {
         this.upperBoundary = new Vector2d(worldParameters.width(), worldParameters.height());
         prepareLists();
         for (Vector2d v : animalsPositions) {
-            Animal a = new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy());
+            Animal a = new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy(),0);
             animals.get(v).add(a);
             statsKeeper.animalBorn(a);
         }
@@ -64,6 +65,17 @@ public class WorldMap implements MoveValidator {
 
     public ArrayList<Animal> animalsAt(Vector2d position) {
         return animals.get(position);
+    }
+
+    public Animal findStrongestAnimal(ArrayList<Animal> animalsOnPosition){
+        Animal maxEnergyAnimal;
+        maxEnergyAnimal = animalsOnPosition.get(0);
+        for (Animal animal : animalsOnPosition) {
+            if (ANIMAL_COMPARATOR.compare(maxEnergyAnimal, animal) > 0){
+                maxEnergyAnimal = animal;
+            }
+        }
+        return maxEnergyAnimal;
     }
 
     public Plant plantAt(Vector2d position) {

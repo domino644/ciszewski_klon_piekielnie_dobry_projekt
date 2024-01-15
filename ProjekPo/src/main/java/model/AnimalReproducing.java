@@ -13,6 +13,7 @@ public class AnimalReproducing {
     private final int maximalMutationNumber;
     private final int reproducingEnergy;
     private final WorldMap map;
+    private int date;
 
     public AnimalReproducing(WorldMap map,SimulationParameters simulationParameters){
         this.map = map;
@@ -68,7 +69,8 @@ public class AnimalReproducing {
         }
     }
 
-    public void animalReproducing(){
+    public void animalReproducing(int date){
+        this.date = date;
         HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
         for (ArrayList<Animal> list : animals.values()) {
             reproducingOnPosition(list);

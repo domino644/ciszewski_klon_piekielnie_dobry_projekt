@@ -13,17 +13,23 @@ public class Animal implements MoveableWorldElement {
     private int currentGen;
     private int energyLevel;
     private MapDirection orientation;
+    private final int bornDate;
+    private int dieDate = 0;
     private int age = 0;
     private int numberOfChildren = 0;
+    private int eatenGrassNumber = 0;
+    private final ArrayList<Animal> children = new ArrayList<>();
     private final Random random= new Random();
 
-    public Animal(Vector2d position,int numberOfGenes,int energyLevel){
+    public Animal(Vector2d position,int numberOfGenes,int energyLevel,int bornDate){
+        this.bornDate = bornDate;
         setPositionAndEnergyLevel(position,energyLevel);
         genotype = new Genotype(numberOfGenes);
         randomGene(numberOfGenes);
     }
 
-    public Animal(Vector2d position,Genotype genotype,int energyLevel){
+    public Animal(Vector2d position,Genotype genotype,int energyLevel,int bornDate){
+        this.bornDate = bornDate;
         setPositionAndEnergyLevel(position,energyLevel);
         this.genotype = genotype;
     }
@@ -56,43 +62,17 @@ public class Animal implements MoveableWorldElement {
         return position;
     }
 
-    public Animal reproduceAnimal(Animal animal,int reproducingEnergy,
-                                  int minimalMutationNumber,int maximalMutationNumber){
-        Genotype genotype1 = prepareGenotype(animal);
-        this.decreaseEnergyLevel(reproducingEnergy);
-        animal.decreaseEnergyLevel(reproducingEnergy);
-        int modificationNumber = minimalMutationNumber + random.nextInt(1+maximalMutationNumber-minimalMutationNumber);
-        for (int i = 0; i < modificationNumber; i++) {
-            genotype1.changeGene();
-        }
-        return new Animal(position,genotype1,2*reproducingEnergy);
+    public AnimalStatistic getAnimalStats(){
+        return new AnimalStatistic(position,orientation,genotype.getGenes(),genotype.geneAt(currentGen),energyLevel,
+                eatenGrassNumber,children.size(),successorsCounter(),age,bornDate);
     }
 
-    private Genotype prepareGenotype(Animal animal){
-        int sumOfEnergy = energyLevel + animal.getEnergyLevel();
-        int thisAnimalGenesNumber = Math.round(((float) energyLevel /sumOfEnergy) * genotype.getGeneLength());
-        int animalGenesNumber = Math.round(((float) animal.getEnergyLevel() /sumOfEnergy) * genotype.getGeneLength());
-        int[] thisAnimalGenes = genotype.getGenes();
-        int[] animalGenes = animal.genotype.getGenes();
-        ArrayList<Integer> futureAnimalGenes = new ArrayList<>();
-        // Wylosowanie 0 oznacza lewą stronę genów mocniejszego zwierzaka a wylosowanie 1 prawą stronę genów
-        if (random.nextInt(2) == 0){
-            for (int i = 0; i < thisAnimalGenesNumber; i++) {
-                futureAnimalGenes.add(thisAnimalGenes[i]);
-            }
-            for (int i = thisAnimalGenesNumber; i < thisAnimalGenesNumber+animalGenesNumber; i++) {
-                futureAnimalGenes.add(animalGenes[i]);
-            }
-        }
-        else {
-            for (int i = 0; i < animalGenesNumber; i++) {
-                futureAnimalGenes.add(animalGenes[i]);
-            }
-            for (int i = animalGenesNumber; i < thisAnimalGenesNumber+animalGenesNumber; i++) {
-                futureAnimalGenes.add(thisAnimalGenes[i]);
-            }
-        }
-        return new Genotype(futureAnimalGenes.stream().mapToInt(Integer::intValue).toArray());
+    public Animal reproduceAnimal(Animal animal,int reproducingEnergy,
+                                  int minimalMutationNumber,int maximalMutationNumber,int date){
+        Animal children = NewAnimalProductionProcess.reproduceAnimal(this,animal,reproducingEnergy,minimalMutationNumber,maximalMutationNumber,date);
+        this.addNewChild(children);
+        animal.addNewChild(children);
+        return children;
     }
 
     public void decreaseEnergyLevel(int x){
@@ -103,7 +83,16 @@ public class Animal implements MoveableWorldElement {
         energyLevel = energyLevel + x;
     }
 
-    public void increaseChildNumber(){
+    public void eat(){
+        eatenGrassNumber++;
+    }
+
+    public void die(int date){
+        dieDate = date;
+    }
+
+    public void addNewChild(Animal child){
+        children.add(child);
         numberOfChildren++;
     }
 
@@ -124,5 +113,11 @@ public class Animal implements MoveableWorldElement {
         this.currentGen = random.nextInt(numberOfGenes);
     }
 
-
+    private int successorsCounter(){
+        int result = 0;
+        for (Animal child: children) {
+            result = result + child.successorsCounter();
+        }
+        return result;
+    }
 }

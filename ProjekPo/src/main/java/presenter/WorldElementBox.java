@@ -12,6 +12,7 @@ import model.AnimalComparator;
 import model.Vector2d;
 import model.WorldMap;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
@@ -43,8 +44,8 @@ public class WorldElementBox {
         else{
             vBox = new VBox();
         }
-        vBox.setMaxWidth(0.9*cellWidth);
-        vBox.setMaxHeight(0.9*cellHeight);
+        vBox.setMaxWidth(cellWidth);
+        vBox.setMaxHeight(cellHeight);
         return vBox;
     }
 
