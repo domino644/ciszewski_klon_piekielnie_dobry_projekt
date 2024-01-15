@@ -63,7 +63,7 @@ public class Animal implements MoveableWorldElement {
     }
 
     public AnimalStatistic getAnimalStats(){
-        return new AnimalStatistic(position,orientation,genotype.getGenes(),genotype.geneAt(currentGen),energyLevel,
+        return new AnimalStatistic(position,orientation,genotype,genotype.geneAt(currentGen),energyLevel,
                 eatenGrassNumber,children.size(),successorsCounter(),age,bornDate);
     }
 
