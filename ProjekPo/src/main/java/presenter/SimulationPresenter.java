@@ -11,11 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import model.*;
 
 import java.util.Collections;
-import java.util.Objects;
 
 public class SimulationPresenter implements MapChangeListener {
     @FXML
