@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.scenario.animation.shared.AnimationAccessor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
