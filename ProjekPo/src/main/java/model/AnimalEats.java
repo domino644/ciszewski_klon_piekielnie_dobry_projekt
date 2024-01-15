@@ -14,23 +14,12 @@ public class AnimalEats {
         this.plantEnergy = simulationParameters.plantEnergy();
     }
 
-    private Animal findStrongestAnimal(ArrayList<Animal> animalsOnPosition){
-        Animal maxEnergyAnimal;
-        maxEnergyAnimal = animalsOnPosition.get(0);
-        for (Animal animal : animalsOnPosition) {
-            if (ANIMAL_COMPARATOR.compare(maxEnergyAnimal, animal) > 0){
-                maxEnergyAnimal = animal;
-            }
-        }
-        return maxEnergyAnimal;
-    }
-
     public void animalEats(){
         HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
         Animal maxEnergyAnimal;
         for (ArrayList<Animal> list : animals.values()) {
             if (!list.isEmpty() && map.plantAt(list.get(0).getPosition()) != null){
-                maxEnergyAnimal = findStrongestAnimal(list);
+                maxEnergyAnimal = map.findStrongestAnimal(list);
                 maxEnergyAnimal.increaseEnergyLevel(plantEnergy);
                 maxEnergyAnimal.eat();
                 map.getPlants().remove(maxEnergyAnimal.getPosition());

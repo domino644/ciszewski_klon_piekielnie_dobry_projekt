@@ -4,6 +4,7 @@ import interfaces.MapChangeListener;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -13,19 +14,17 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.Simulation;
-import model.SimulationEngine;
-import model.Vector2d;
-import model.WorldMap;
+import model.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 public class SimulationPresenter implements MapChangeListener {
     @FXML
-    private Label messageLabel;
-    @FXML
     private GridPane mapGrid;
+    @FXML
+    private GridPane gridAnimalStats;
     @FXML
     private Button startButton;
     @FXML
@@ -39,13 +38,12 @@ public class SimulationPresenter implements MapChangeListener {
     private static final int GRID_HEIGHT = 500;
     private float cellWidth;
     private float cellHeight;
+    private boolean animalStatsPrint = false;
+    private Animal trackedAnimal;
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
-        Platform.runLater(() -> {
-            drawMap();
-            messageLabel.setText(message);
-        });
+        Platform.runLater(this::drawMap);
     }
 
     public void setWorldMap(WorldMap map) {
@@ -68,9 +66,35 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void drawMap() {
-        clearGrid();
+        clearGrid(mapGrid);
         mapGrid.getChildren().add(gridCreator(false));
+        if (animalStatsPrint){
+            clearGrid(gridAnimalStats);
+            gridAnimalStats.getChildren().add(gridStatsCreator());
+        }
     }
+
+    private GridPane gridStatsCreator(){
+        GridPane gridPane = new GridPane();
+        Label label;
+        String[] namesRow = {"Pozycja","Orientacja","Genotyp","Aktywny genom","Energia","Zjedzona trawa",
+        "Ilość dzieci","Ilość krewnych","Wiek","Data urodzenia"};
+        String[] values = trackedAnimal.getAnimalStats().animalStringStats();
+        gridPane.getColumnConstraints().add(new ColumnConstraints(65));
+        gridPane.getColumnConstraints().add(new ColumnConstraints(65));
+        for (int i = 0; i < 10; i++) {
+            gridPane.getRowConstraints().add(new RowConstraints(GRID_HEIGHT/10));
+            label = scaleFontLabel(namesRow[10-i-1]);
+            gridPane.add(label, 0, 10-i);
+            label = scaleFontLabel(values[10-i-1]);
+            gridPane.add(label, 1, 10-i);
+            GridPane.setHalignment(label, HPos.CENTER);
+        }
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        return gridPane;
+    }
+
+
 
     private GridPane gridCreator(boolean canClick) {
         Vector2d lowerBoundary = map.getLowerBoundary();
@@ -115,7 +139,8 @@ public class SimulationPresenter implements MapChangeListener {
                 vector2d = new Vector2d(cordX, cordY);
                 VBox vBox = worldElementBox.createVbox(vector2d,cellWidth,cellHeight);
                 if (canClick && !map.getAnimals().get(vector2d).isEmpty()){
-                    vBox.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> handleMouseClick());
+                    Vector2d finalVector2d = vector2d;
+                    vBox.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> handleMouseClick(finalVector2d));
                 }
                 gridPane.add(vBox, j + 1, numberRows - i);
                 GridPane.setHalignment(vBox, HPos.CENTER);
@@ -123,17 +148,17 @@ public class SimulationPresenter implements MapChangeListener {
         }
     }
 
-    private void handleMouseClick() {
+    private void handleMouseClick(Vector2d vector2d) {
+        ArrayList<Animal> animalArrayList= map.getAnimals().get(vector2d);
+        trackedAnimal = map.findStrongestAnimal(animalArrayList);
+        animalStatsPrint = true;
         System.out.println("Mouse Click detected on VBox!");
-        // Add any additional actions you want to perform on mouse click
     }
 
     public void trackAnimal(){
-        clearGrid();
+        clearGrid(mapGrid);
         mapGrid.getChildren().add(gridCreator(true));
     }
-
-
 
     public void onSimulationStartClicked() {
         simulation.setSimulationPlay(true);
@@ -151,10 +176,10 @@ public class SimulationPresenter implements MapChangeListener {
         stopButton.setDisable(true);
     }
 
-    private void clearGrid() {
-        mapGrid.getChildren().retainAll();
-        mapGrid.getColumnConstraints().clear();
-        mapGrid.getRowConstraints().clear();
+    private void clearGrid(GridPane gridPane) {
+        gridPane.getChildren().retainAll();
+        gridPane.getColumnConstraints().clear();
+        gridPane.getRowConstraints().clear();
     }
 
     private Label scaleFontLabel(String message){
