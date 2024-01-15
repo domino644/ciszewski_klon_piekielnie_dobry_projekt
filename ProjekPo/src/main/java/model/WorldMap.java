@@ -74,7 +74,7 @@ public class WorldMap implements MoveValidator {
     }
 
     public boolean isOccupied(Vector2d position) {
-        return animals.get(position) != null || plants.get(position) != null;
+        return (animals.get(position) != null && !animals.get(position).isEmpty()) || plants.get(position) != null;
     }
 
     @Override
