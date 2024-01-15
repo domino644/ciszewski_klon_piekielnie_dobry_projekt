@@ -1,4 +1,8 @@
-package model;
+package model.plant;
+
+import model.Vector2d;
+import model.WorldMap;
+import model.records.SimulationParameters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +12,7 @@ public class PlantsRegenerator {
     private final WorldMap map;
     private final int numberOfPlantsGrowPerDay;
 
-    public PlantsRegenerator(WorldMap map,SimulationParameters simulationParameters){
+    public PlantsRegenerator(WorldMap map, SimulationParameters simulationParameters){
         this.map = map;
         numberOfPlantsGrowPerDay = simulationParameters.numberOfPlantsGrowPerDay();
     }

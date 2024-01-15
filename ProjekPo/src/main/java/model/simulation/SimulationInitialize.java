@@ -1,4 +1,8 @@
-package model;
+package model.simulation;
+
+import model.records.SimulationParameters;
+import model.WorldMap;
+import model.records.WorldParameters;
 
 public class SimulationInitialize {
 

@@ -1,5 +1,9 @@
-package model;
+package model.animal;
 
+
+import model.records.SimulationParameters;
+import model.Vector2d;
+import model.WorldMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +19,7 @@ public class AnimalReproducing {
     private final WorldMap map;
     private int date;
 
-    public AnimalReproducing(WorldMap map,SimulationParameters simulationParameters){
+    public AnimalReproducing(WorldMap map, SimulationParameters simulationParameters){
         this.map = map;
         maximalMutationNumber = simulationParameters.maximalMutationNumber();
         minimalMutationNumber = simulationParameters.minimalMutationNumber();

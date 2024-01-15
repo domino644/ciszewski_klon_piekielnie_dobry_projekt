@@ -1,5 +1,6 @@
-package model;
+package model.utils;
 
+import model.Vector2d;
 import model.WorldMap;
 
 public class MapVisualizer {
@@ -8,11 +9,6 @@ public class MapVisualizer {
     private static final String CELL_SEGMENT = "|";
     private final WorldMap map;
 
-    /**
-     * Initializes the MapVisualizer with an instance of map to visualize.
-     *
-     * @param map
-     */
     public MapVisualizer(WorldMap map) {
         this.map = map;
     }

@@ -1,8 +1,10 @@
-package model;
+package model.animal;
 
 import enums.MapDirection;
 import interfaces.MoveValidator;
 import interfaces.MoveableWorldElement;
+import model.Genotype;
+import model.Vector2d;
 
 import java.util.ArrayList;
 import java.util.Random;

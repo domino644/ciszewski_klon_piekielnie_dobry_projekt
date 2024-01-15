@@ -1,10 +1,9 @@
-package model;
+package model.utils;
 
 import interfaces.GetRandomVector;
+import model.Vector2d;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
 
 public class RandomVectorGenerator implements GetRandomVector {

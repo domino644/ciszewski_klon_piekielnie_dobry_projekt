@@ -1,4 +1,4 @@
-package model;
+package model.animal;
 
 import java.util.Comparator;
 

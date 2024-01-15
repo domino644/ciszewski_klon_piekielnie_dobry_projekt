@@ -1,4 +1,4 @@
-package model;
+package model.records;
 
 public record WorldParameters(int width, int height, int numberOfAnimals, int numberOfPlants,
                               int startAnimalEnergy, int minimalEnergyToReproduction,

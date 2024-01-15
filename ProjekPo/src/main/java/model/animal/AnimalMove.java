@@ -1,4 +1,8 @@
-package model;
+package model.animal;
+
+import model.records.SimulationParameters;
+import model.Vector2d;
+import model.WorldMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +12,7 @@ public class AnimalMove {
     private final WorldMap map;
     private final int lossEnergyPerDay;
 
-    public AnimalMove(WorldMap map,SimulationParameters simulationParameters){
+    public AnimalMove(WorldMap map, SimulationParameters simulationParameters){
         this.map = map;
         lossEnergyPerDay = simulationParameters.lostEnergyPerDay();
     }

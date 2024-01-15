@@ -1,5 +1,9 @@
 package model;
 
+import model.animal.Animal;
+import model.animal.AnimalEats;
+import model.records.SimulationParameters;
+import model.records.WorldParameters;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -15,6 +15,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.*;
+import model.simulation.Simulation;
+import model.simulation.SimulationEngine;
+import presenter.components.WorldElementBox;
+import presenter.utils.FontResizer;
 
 import java.util.ArrayList;
 import java.util.Collections;

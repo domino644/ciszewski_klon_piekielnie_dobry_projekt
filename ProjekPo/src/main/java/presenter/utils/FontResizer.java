@@ -1,4 +1,4 @@
-package presenter;
+package presenter.utils;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;

@@ -1,6 +1,5 @@
 package presenter;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +8,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.*;
+import model.simulation.Simulation;
+import model.simulation.SimulationInitialize;
+import presenter.components.WorldElementBox;
 
 import java.io.IOException;
 public class StartPresenter {
