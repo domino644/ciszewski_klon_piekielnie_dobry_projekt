@@ -2,13 +2,11 @@ package presenter;
 
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 
 import javafx.scene.image.Image;
-import javafx.scene.text.Font;
 import model.Animal;
 import model.AnimalComparator;
 import model.Vector2d;
@@ -24,15 +22,22 @@ public class WorldElementBox {
     private final WorldMap map;
     private final AnimalComparator ANIMAL_COMPARATOR = new AnimalComparator();
 
+    private static final Image LOW = new Image("low.png");
+    private static final Image SEMI = new Image("semi.png");
+    private static final Image MID = new Image("mid.png");
+    private static final Image MID_MORE = new Image("mid-more.png");
+    private static final Image FULL = new Image("full.png");
+    private static final Image GRASS = new Image("trawa.png");
+
     public WorldElementBox(int startEnergy,WorldMap map) {
         this.map = map;
         this.startEnergy = startEnergy;
-    };
+    }
     public VBox createVbox(Vector2d vector2d,float cellWidth,float cellHeight){
         VBox vBox;
-        String fileName = fileNameMatch(vector2d);
-        if (fileName != null){
-            ImageView imageView = createImage(fileName,cellWidth,cellHeight);
+        Image img = fileNameMatch(vector2d);
+        if (img != null){
+            ImageView imageView = createImage(img,cellWidth,cellHeight);
             vBox = new VBox(imageView);
             vBox.setAlignment(Pos.CENTER);
         }
@@ -44,14 +49,14 @@ public class WorldElementBox {
         return vBox;
     }
 
-    private String fileNameMatch(Vector2d vector2d){
+    private Image fileNameMatch(Vector2d vector2d){
         ArrayList<Animal> animals = map.getAnimals().get(vector2d);
         if (!animals.isEmpty()){
             Animal animal = findStrongestAnimal(animals);
             return animalTexture(animal.getEnergyLevel());
         }
         else if (map.getPlants().get(vector2d) != null) {
-            return "trawa.png";
+            return GRASS;
         }
         return null;
     }
@@ -67,27 +72,26 @@ public class WorldElementBox {
         return maxEnergyAnimal;
     }
 
-    private String animalTexture(int energy){
+    private Image animalTexture(int energy){
         float energyLevel = (float) energy/startEnergy;
         if (energyLevel <= 0.2){
-            return "low.png";
+            return LOW;
         }
         else if (energyLevel <= 0.4){
-            return "semi.png";
+            return SEMI;
         }
         else if (energyLevel <= 0.6){
-            return "mid.png";
+            return MID;
         }
         else if (energyLevel <= 0.8){
-            return "mid-more.png";
+            return MID_MORE;
         }
         else {
-            return "full.png";
+            return FULL;
         }
     }
 
-    private ImageView createImage(String fileName,float cellWidth,float cellHeight){
-        Image image = new Image(fileName);
+    private ImageView createImage(Image image,float cellWidth,float cellHeight){
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(cellWidth);
         imageView.setFitHeight(cellHeight);
