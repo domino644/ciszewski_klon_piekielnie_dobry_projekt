@@ -32,8 +32,9 @@ public class AnimalEats {
             if (!list.isEmpty() && map.plantAt(list.get(0).getPosition()) != null){
                 maxEnergyAnimal = findStrongestAnimal(list);
                 maxEnergyAnimal.increaseEnergyLevel(plantEnergy);
+                maxEnergyAnimal.eat();
                 map.getPlants().remove(maxEnergyAnimal.getPosition());
-                map.mapChangedEmit("Zwierze z pozycji: " + maxEnergyAnimal.getPosition() + " zjadlo rosline");
+                map.mapChangedEmit("");
                 map.getStatsKeeper().plantEaten();
             }
         }

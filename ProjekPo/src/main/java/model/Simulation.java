@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Simulation implements Runnable{
 
     private final WorldMap map;
-    private final MapVisualizer mapVisualizer;
     private final AnimalMove animalMove;
     private final AnimalEats animalEats;
     private final AnimalReproducing animalReproducing;
@@ -16,7 +15,6 @@ public class Simulation implements Runnable{
 
     public Simulation (WorldMap map,SimulationParameters simulationParameters){
         this.map = map;
-        this.mapVisualizer = new MapVisualizer(map);
         animalMove = new AnimalMove(map,simulationParameters);
         animalEats = new AnimalEats(map,simulationParameters);
         animalReproducing = new AnimalReproducing(map,simulationParameters);
@@ -32,22 +30,22 @@ public class Simulation implements Runnable{
         return allAnimals;
     }
 
-    public void dailyMapChange(){
+    public void dailyMapChange(int date){
         ArrayList<Animal> allAnimalsOnBoard = allAnimalsOnBoard();
         animalMove.animalMoves(allAnimalsOnBoard);
         animalEats.animalEats();
-        animalReproducing.animalReproducing();
-        animalClear.clearMap(allAnimalsOnBoard);
+        animalReproducing.animalReproducing(date);
+        animalClear.clearMap(allAnimalsOnBoard,date);
         plantsRegenerator.plantsRegenerate();
     }
 
     @Override
     public void run() {
+        int date = 0;
         while (!killSimulation) {
             try {
                 while (simulationPlay) {
-                    this.dailyMapChange();
-                    System.out.println(mapVisualizer.draw(map.getLowerBoundary(), map.getUpperBoundary()));
+                    this.dailyMapChange(date);
                     Thread.sleep(500);
                 }
             } catch (InterruptedException e) {

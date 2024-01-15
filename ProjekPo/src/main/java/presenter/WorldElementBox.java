@@ -14,6 +14,7 @@ import model.AnimalComparator;
 import model.Vector2d;
 import model.WorldMap;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
@@ -31,9 +32,6 @@ public class WorldElementBox {
         VBox vBox;
         String fileName = fileNameMatch(vector2d);
         if (fileName != null){
-//            Label label = new Label(vector2d.toString());
-//            double adjustedFontSize = FontResizer.calculateOptimalFontSize(label.getText(),label.getFont(),cellWidth);
-//            label.setFont(new Font(adjustedFontSize));
             ImageView imageView = createImage(fileName,cellWidth,cellHeight);
             vBox = new VBox(imageView);
             vBox.setAlignment(Pos.CENTER);
@@ -41,8 +39,8 @@ public class WorldElementBox {
         else{
             vBox = new VBox();
         }
-        vBox.setMaxWidth(0.9*cellWidth);
-        vBox.setMaxHeight(0.9*cellHeight);
+        vBox.setMaxWidth(cellWidth);
+        vBox.setMaxHeight(cellHeight);
         return vBox;
     }
 

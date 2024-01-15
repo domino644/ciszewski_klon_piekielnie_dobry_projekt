@@ -28,7 +28,7 @@ public class WorldMap implements MoveValidator {
         this.upperBoundary = new Vector2d(worldParameters.width(), worldParameters.height());
         prepareLists();
         for (Vector2d v : animalsPositions) {
-            Animal a = new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy());
+            Animal a = new Animal(v, worldParameters.genomeLength(), worldParameters.startAnimalEnergy(),0);
             animals.get(v).add(a);
             statsKeeper.animalBorn(a);
         }

@@ -13,6 +13,7 @@ public class AnimalReproducing {
     private final int maximalMutationNumber;
     private final int reproducingEnergy;
     private final WorldMap map;
+    private int date;
 
     public AnimalReproducing(WorldMap map,SimulationParameters simulationParameters){
         this.map = map;
@@ -51,7 +52,7 @@ public class AnimalReproducing {
             Animal secondCandidateToReproduce = pair.get()[1];
             if (secondCandidateToReproduce.getEnergyLevel() > minimalEnergyToReproduction){
                 Animal newAnimal = firstCandidateToReproduce.reproduceAnimal(secondCandidateToReproduce,reproducingEnergy,
-                        minimalMutationNumber,maximalMutationNumber);
+                        minimalMutationNumber,maximalMutationNumber,date);
                 map.getAnimals().get(newAnimal.getPosition()).add(newAnimal);
                 map.mapChangedEmit("Powstało nowe zwierze na pozycji: " + newAnimal.getPosition());
                 map.getStatsKeeper().animalBorn(newAnimal);
@@ -66,7 +67,8 @@ public class AnimalReproducing {
         }
     }
 
-    public void animalReproducing(){
+    public void animalReproducing(int date){
+        this.date = date;
         HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
         for (ArrayList<Animal> list : animals.values()) {
             reproducingOnPosition(list);
