@@ -22,12 +22,14 @@ public class WorldMap implements MoveValidator {
     private final ArrayList<MapChangeListener> listeners = new ArrayList<>();
     private final StatsKeeper statsKeeper = new StatsKeeper(this);
     private static final AnimalComparator ANIMAL_COMPARATOR = new AnimalComparator();
+    private final WorldParameters worldParameters;
 
 
     public WorldMap(WorldParameters worldParameters) {
         if (worldParameters.height() <= 0 || worldParameters.width() <= 0) {
             throw new IllegalArgumentException("Width and height of map have to be greater than 0");
         }
+        this.worldParameters = worldParameters;
         randomVectorGenerator = new RandomVectorGenerator(worldParameters.width(), worldParameters.height());
         Vector2d[] animalsPositions = randomVectorGenerator.RandomVectorAnimal(worldParameters.numberOfAnimals()).toArray(new Vector2d[0]);
         Vector2d[] plantsPositions = randomVectorGenerator.RandomVectorGrass(new Vector2d[0], worldParameters.numberOfPlants()).toArray(new Vector2d[0]);
@@ -56,6 +58,10 @@ public class WorldMap implements MoveValidator {
                 animals.put(vector2d, new ArrayList<>());
             }
         }
+    }
+
+    public WorldParameters getWorldParameters() {
+        return worldParameters;
     }
 
     public String objectAt(Vector2d position) {
