@@ -52,9 +52,9 @@ public class AnimalReproducing {
             Animal secondCandidateToReproduce = pair.get()[1];
             if (secondCandidateToReproduce.getEnergyLevel() > minimalEnergyToReproduction){
                 Animal newAnimal = firstCandidateToReproduce.reproduceAnimal(secondCandidateToReproduce,reproducingEnergy,
-                        minimalMutationNumber,maximalMutationNumber);
-                firstCandidateToReproduce.increaseChildNumber();
-                secondCandidateToReproduce.increaseChildNumber();
+                        minimalMutationNumber,maximalMutationNumber,date);
+                firstCandidateToReproduce.addNewChild(newAnimal);
+                secondCandidateToReproduce.addNewChild(newAnimal);
                 map.getAnimals().get(newAnimal.getPosition()).add(newAnimal);
                 map.mapChangedEmit("Powstało nowe zwierze na pozycji: " + newAnimal.getPosition());
                 map.getStatsKeeper().animalBorn(newAnimal);

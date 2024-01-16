@@ -31,7 +31,7 @@ public class NewAnimalProductionProcess {
             futureAnimalGenes = genesToList(strongerAnimalGenes,animalGenes,strongerAnimalGenesNumber, strongerAnimalGenes.length);
         }
         else {
-            futureAnimalGenes = genesToList(animalGenes,strongerAnimalGenes,animalGenesNumber,strongerAnimalGenesNumber);
+            futureAnimalGenes = genesToList(animalGenes,strongerAnimalGenes,animalGenesNumber,strongerAnimalGenes.length);
         }
         return new Genotype(futureAnimalGenes.stream().mapToInt(Integer::intValue).toArray());
     }

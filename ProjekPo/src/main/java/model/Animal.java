@@ -105,11 +105,9 @@ public class Animal implements MoveableWorldElement {
     public Genotype getGenotype() { return genotype;}
 
     private void randomOrientation(){
-        Random random = new Random();
         this.orientation = MapDirection.numberToMapDirection(random.nextInt(8));
     }
     private void randomGene(int numberOfGenes){
-        Random random = new Random();
         this.currentGen = random.nextInt(numberOfGenes);
     }
 
