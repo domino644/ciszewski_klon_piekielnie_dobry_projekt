@@ -1,11 +1,8 @@
 package model.simulation;
-
-import model.utils.MapVisualizer;
 import model.plant.PlantsRegenerator;
 import model.records.SimulationParameters;
 import model.WorldMap;
 import model.animal.*;
-import presenter.utils.CSVHandler;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
