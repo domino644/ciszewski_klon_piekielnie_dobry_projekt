@@ -15,12 +15,12 @@ public class SimulationInitialize {
     public SimulationInitialize(int width, int height, int numberOfAnimals, int numberOfPlants,
                                 int numberOfPlantsGrowPerDay, int startAnimalEnergy, int minimalEnergyToReproduction,
                                 int reproducingEnergy, int minimalMutationNumber, int maximalMutationNumber,
-                                int genomeLength, int plantEnergy, int lostEnergyPerDay) {
+                                int genomeLength, int plantEnergy, int lostEnergyPerDay, boolean saveStats, String fileName) {
         WorldParameters worldParameters = new WorldParameters(width, height, numberOfAnimals,
                 numberOfPlants, startAnimalEnergy, minimalEnergyToReproduction, genomeLength);
         SimulationParameters simulationParameters = new SimulationParameters(numberOfPlantsGrowPerDay,
                 minimalEnergyToReproduction, reproducingEnergy, minimalMutationNumber,
-                maximalMutationNumber, plantEnergy, lostEnergyPerDay);
+                maximalMutationNumber, plantEnergy, lostEnergyPerDay, saveStats, fileName);
         this.allParameters = new AllParameters(worldParameters,simulationParameters);
         worldMap = new WorldMap(worldParameters);
         simulation = new Simulation(worldMap, simulationParameters);
