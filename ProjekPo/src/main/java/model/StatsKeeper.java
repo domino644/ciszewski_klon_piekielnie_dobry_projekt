@@ -144,4 +144,17 @@ public class StatsKeeper {
         return deadAnimals.size();
     }
 
+    public String[] stringArgumentsGet(){
+        Genotype genotype = getMostPopularGenotype();
+        String gen;
+        if (genotype != null){
+            gen = genotype.toString();
+        }
+        else {
+            gen = "Brak";
+        }
+        return new String[]{Integer.toString(aliveAnimals.size()),Integer.toString(deadAnimals.size()),Integer.toString(numberOfPlants),
+        Integer.toString(getNumberOfFreeFields()),Float.toString(getAverageEnergyLevel()),
+        Float.toString(getAverageLifetime()),Float.toString(getAvgNumberOfKids()),gen};
+    }
 }

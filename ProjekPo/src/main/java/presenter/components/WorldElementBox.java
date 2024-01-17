@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 
 
 import javafx.scene.image.Image;
+import model.Genotype;
 import model.animal.Animal;
 import model.animal.AnimalComparator;
 import model.Vector2d;
@@ -32,7 +33,7 @@ public class WorldElementBox {
         this.map = map;
         this.startEnergy = startEnergy;
     }
-    public VBox createVbox(Vector2d vector2d,float cellWidth,float cellHeight){
+    public VBox createVbox(Vector2d vector2d,float cellWidth,float cellHeight,int option){
         VBox vBox;
         Image img = fileNameMatch(vector2d);
         if (img != null){
@@ -42,6 +43,16 @@ public class WorldElementBox {
         }
         else{
             vBox = new VBox();
+        }
+        if (option == 1){
+            if (genotypeAtPosition(vector2d)){
+                vBox.setStyle("-fx-background-color: #34CFE7;");
+            }
+        }
+        else if (option == 2){
+            if (vector2d.getY() >= (int) Math.floor(map.getUpperBoundary().getY()*0.4) && vector2d.getY() < (int) Math.floor(map.getUpperBoundary().getY()*0.4) + (int) Math.round(map.getUpperBoundary().getY()*0.2)){
+                vBox.setStyle("-fx-background-color: #88F979;");
+            }
         }
         vBox.setMaxWidth(cellWidth);
         vBox.setMaxHeight(cellHeight);
@@ -69,6 +80,17 @@ public class WorldElementBox {
             }
         }
         return maxEnergyAnimal;
+    }
+
+    private boolean genotypeAtPosition(Vector2d vector2d){
+        ArrayList<Animal> animals = map.getAnimals().get(vector2d);
+        Genotype mostPopularGenotype = map.getStatsKeeper().getMostPopularGenotype();
+        for (Animal animal: animals) {
+            if (animal.getGenotype() == mostPopularGenotype){
+                return true;
+            }
+        }
+        return false;
     }
 
     private Image animalTexture(int energy){
