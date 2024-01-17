@@ -3,10 +3,7 @@ package model;
 
 import model.animal.Animal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class StatsKeeper {
     private final WorldMap map;
@@ -69,6 +66,21 @@ public class StatsKeeper {
             }
         }
         return mostPopularGenotype;
+    }
+
+    public List<Genotype> getAllMostPopularGenotypes(){
+        Genotype mostPopularGenotype = getMostPopularGenotype();
+        if (!Objects.isNull(mostPopularGenotype)){
+            List<Genotype> mostPopularGenotypes = new ArrayList<>();
+            int popularityLevel = genotypesPopularity.get(mostPopularGenotype);
+            for(Genotype genotype : genotypesPopularity.keySet()){
+                if(genotypesPopularity.get(genotype) == popularityLevel){
+                    mostPopularGenotypes.add(genotype);
+                }
+            }
+            return mostPopularGenotypes;
+        }
+        return null;
     }
 
     public float getAverageEnergyLevel() {
