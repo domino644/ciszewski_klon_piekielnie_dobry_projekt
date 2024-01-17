@@ -3,10 +3,7 @@ package model;
 
 import model.animal.Animal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class StatsKeeper {
     private final WorldMap map;
@@ -46,17 +43,11 @@ public class StatsKeeper {
     }
 
     private void addGenotype(Genotype genotype) {
-        if (genotypesPopularity.get(genotype) != null) {
-            genotypesPopularity.put(genotype, genotypesPopularity.remove(genotype) + 1);
-        } else {
-            genotypesPopularity.put(genotype, 1);
-        }
+        genotypesPopularity.put(genotype, genotypesPopularity.getOrDefault(genotype,0)+1);
     }
 
     private void removeGenotype(Genotype genotype) {
-        if (genotypesPopularity.get(genotype) != null) {
-            genotypesPopularity.put(genotype, genotypesPopularity.remove(genotype) - 1);
-        }
+        genotypesPopularity.put(genotype, genotypesPopularity.getOrDefault(genotype,1)-1);
     }
 
     public Genotype getMostPopularGenotype() {
@@ -69,6 +60,21 @@ public class StatsKeeper {
             }
         }
         return mostPopularGenotype;
+    }
+
+    public List<Genotype> getAllMostPopularGenotypes(){
+        Genotype mostPopularGenotype = getMostPopularGenotype();
+        if (!Objects.isNull(mostPopularGenotype)){
+            List<Genotype> mostPopularGenotypes = new ArrayList<>();
+            int popularityLevel = genotypesPopularity.get(mostPopularGenotype);
+            for(Genotype genotype : genotypesPopularity.keySet()){
+                if(genotypesPopularity.get(genotype) == popularityLevel){
+                    mostPopularGenotypes.add(genotype);
+                }
+            }
+            return mostPopularGenotypes;
+        }
+        return null;
     }
 
     public float getAverageEnergyLevel() {
@@ -144,4 +150,21 @@ public class StatsKeeper {
         return deadAnimals.size();
     }
 
+    public String[] stringArgumentsGet(){
+        Genotype genotype = getMostPopularGenotype();
+        String gen;
+        if (genotype != null){
+            gen = genotype.toString();
+        }
+        else {
+            gen = "Brak";
+        }
+        return new String[]{Integer.toString(aliveAnimals.size()),Integer.toString(deadAnimals.size()),Integer.toString(numberOfPlants),
+        Integer.toString(getNumberOfFreeFields()),Float.toString(getAverageEnergyLevel()),
+        Float.toString(getAverageLifetime()),Float.toString(getAvgNumberOfKids()),gen};
+    }
+
+    public HashMap<Genotype, Integer> getGenotypesPopularity() {
+        return genotypesPopularity;
+    }
 }

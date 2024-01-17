@@ -43,7 +43,7 @@
                     <Label text="Reproducing energy"/>
                     <Spinner fx:id="reproducingEnergySpinner" editable="true" max="100" initialValue="3"/>
                     <Label text="Minimal mutations"/>
-                    <Spinner fx:id="minimalMutationNumberSpinner" editable="true" max="7" min="1" initialValue="4"/>
+                    <Spinner fx:id="minimalMutationNumberSpinner" editable="true" max="7" min="0" initialValue="4"/>
                     <Label text="Maximum mutations"/>
                     <Spinner fx:id="maximalMutationNumberSpinner" editable="true" max="7" initialValue="7"/>
                     <Label text="Genotype length"/>
