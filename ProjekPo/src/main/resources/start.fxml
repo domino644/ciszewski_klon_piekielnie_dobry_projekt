@@ -32,28 +32,28 @@
             <HBox alignment="CENTER" spacing="10">
                 <VBox alignment="BOTTOM_LEFT" spacing="10">
                     <Label text="Map width"/>
-                    <Spinner fx:id="widthSpinner" editable="true" max="100" initialValue="10"/>
+                    <Spinner fx:id="widthSpinner" editable="true" min="1" max="100" initialValue="10"/>
                     <Label text="Map height"/>
-                    <Spinner fx:id="heightSpinner" editable="true" max="100" initialValue="10"/>
+                    <Spinner fx:id="heightSpinner" editable="true" min="1" max="100" initialValue="10"/>
                     <Label text="Number of animals"/>
-                    <Spinner fx:id="numberOfAnimalsSpinner" editable="true" max="30" initialValue="4"/>
+                    <Spinner fx:id="numberOfAnimalsSpinner" editable="true" min="0" initialValue="4"/>
                     <Label text="Number of plants"/>
-                    <Spinner fx:id="numberOfPlantsSpinner" editable="true" max="50" initialValue="8"/>
+                    <Spinner fx:id="numberOfPlantsSpinner" editable="true" min="0" initialValue="8"/>
                     <Label text="Plant grow per day"/>
-                    <Spinner fx:id="numberOfPlantsGrowPerDaySpinner" editable="true" max="40" initialValue="2"/>
+                    <Spinner fx:id="numberOfPlantsGrowPerDaySpinner" editable="true" min="0" max="40" initialValue="2"/>
                     <Label text="Start energy"/>
-                    <Spinner fx:id="startAnimalEnergySpinner" editable="true" max="100" initialValue="15"/>
+                    <Spinner fx:id="startAnimalEnergySpinner" editable="true" min="0" max="100" initialValue="15"/>
 
                 </VBox>
                 <VBox alignment="BOTTOM_LEFT" spacing="10">
                     <Label text="Minimal energy to reproduce"/>
-                    <Spinner fx:id="minimalEnergyToReproductionSpinner" editable="true" max="100" initialValue="5"/>
+                    <Spinner fx:id="minimalEnergyToReproductionSpinner" editable="true" min="0" max="100" initialValue="5"/>
                     <Label text="Reproducing energy"/>
-                    <Spinner fx:id="reproducingEnergySpinner" editable="true" max="100" initialValue="3"/>
+                    <Spinner fx:id="reproducingEnergySpinner" editable="true" max="100" min="0" initialValue="3"/>
                     <Label text="Minimal mutations"/>
                     <Spinner fx:id="minimalMutationNumberSpinner" editable="true" max="7" min="0" initialValue="4"/>
                     <Label text="Maximum mutations"/>
-                    <Spinner fx:id="maximalMutationNumberSpinner" editable="true" max="7" initialValue="7"/>
+                    <Spinner fx:id="maximalMutationNumberSpinner" editable="true" min="0" max="7" initialValue="7"/>
                     <Label text="Genotype length"/>
                     <Spinner fx:id="genomeLengthSpinner" editable="true" max="8" min="1" initialValue="8"/>
                     <Label text="Plant energy"/>
@@ -61,7 +61,7 @@
                 </VBox>
             </HBox>
             <Label text="Lost energy per day"/>
-            <Spinner fx:id="lostEnergyPerDaySpinner" editable="true" max="100" initialValue="3"/>
+            <Spinner fx:id="lostEnergyPerDaySpinner" editable="true" min="0" max="100" initialValue="3"/>
             <Button text="Generate Simulation" onAction="#simulationStart"/>
         </VBox>
     </center>
