@@ -9,56 +9,28 @@
             fx:controller="presenter.SimulationPresenter"
             minHeight="600.0" minWidth="1200.0">
     <top>
-        <HBox alignment="BASELINE_CENTER">
-            <Label fx:id="messageLabel"/>
-            <Button fx:id="startButton" text="Start" textAlignment="CENTER" onAction="#onSimulationStartClicked"/>
-
-            <Button fx:id="stopButton" text="Stop" textAlignment="CENTER" onAction="#onSimulationStopClicked" disable="true"/>
-            <Button fx:id="trackButton" text="Track" textAlignment="CENTER" onAction="#trackAnimal"/>
+        <HBox alignment="BASELINE_CENTER" spacing="10">
+            <Button fx:id="startButton" text="Start Simulation" textAlignment="CENTER" onAction="#onSimulationStartClicked"/>
+            <Button fx:id="stopButton" text="Stop Simulation" textAlignment="CENTER" onAction="#onSimulationStopClicked" disable="true"/>
+            <Button fx:id="trackButton" text="Track Animal" textAlignment="CENTER" onAction="#trackAnimal"/>
+            <Button fx:id="stopTrackButton" text="Stop Track" textAlignment="CENTER" onAction="#stopTrackAnimal" disable="true"/>
+            <Button fx:id="showStatsButton" text="Show Statistic" textAlignment="CENTER" onAction="#showStatistic"/>
+            <Button fx:id="hideStatsButton" text="Hide Statistic" textAlignment="CENTER" onAction="#hideStatistic" disable="true"/>
+            <Button fx:id="showGrass" text="Show Grass" textAlignment="CENTER" onAction="#grassFieldShow" />
+            <Button fx:id="showGenotype" text="Show Genotype" textAlignment="CENTER" onAction="#genotypeShow" />
         </HBox>
     </top>
-    <center>
-        <HBox alignment="BASELINE_CENTER">
-            <GridPane fx:id="mapGrid" gridLinesVisible="true" alignment="CENTER"/>
-            <GridPane fx:id="gridAnimalStats" gridLinesVisible="true" alignment="CENTER_RIGHT"/>
+    <center >
+        <HBox alignment="CENTER" style="-fx-padding: 10 10 10 10;">
+            <VBox alignment="CENTER_LEFT">
+                <GridPane fx:id="gridMapStats" alignment="CENTER"/>
+            </VBox>
+            <VBox alignment="CENTER">
+                <GridPane fx:id="mapGrid" gridLinesVisible="true" alignment="CENTER"/>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT">
+                <GridPane fx:id="gridAnimalStats" alignment="CENTER"/>
+            </VBox>
         </HBox>
     </center>
-    <bottom>
-        <VBox alignment="CENTER" spacing="10">
-            <HBox alignment="CENTER" spacing="20">
-                <VBox alignment="CENTER">
-                    <Label text="Liczba zwierząt"/>
-                    <Label fx:id="animalQuantityLabel"/>
-                </VBox>
-                <VBox alignment="CENTER">
-                    <Label text="Liczba roślin"/>
-                    <Label fx:id="plantQuantityLabel"/>
-                </VBox>
-                <VBox alignment="CENTER">
-                    <Label text="Liczba wolnych pól"/>
-                    <Label fx:id="freeFieldsQuantityLabel"/>
-                </VBox>
-            </HBox>
-            <HBox alignment="CENTER" spacing="20">
-                <VBox alignment="CENTER">
-                    <Label text="Średni poziom energii"/>
-                    <Label fx:id="averageEnergyLevelLabel"/>
-                </VBox>
-                <VBox alignment="CENTER">
-                    <Label text="Średnia długość życia"/>
-                    <Label fx:id="averageLifetimeLabel"/>
-                </VBox>
-                <VBox alignment="CENTER">
-                    <Label text="Średnia liczba dzieci"/>
-                    <Label fx:id="averageNumberOfKidsLabel"/>
-                </VBox>
-            </HBox>
-            <HBox alignment="CENTER">
-                <VBox alignment="CENTER">
-                    <Label text="Najpopularniejszy genotyp"/>
-                    <Label fx:id="mostPopularGenotypeLabel"/>
-                </VBox>
-            </HBox>
-        </VBox>
-    </bottom>
 </BorderPane>
