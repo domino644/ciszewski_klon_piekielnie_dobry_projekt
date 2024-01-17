@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Genotype {
@@ -89,5 +90,10 @@ public class Genotype {
         }
         stringBuilder.append(">");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public int hashCode(){
+        return Arrays.hashCode(genes);
     }
 }
