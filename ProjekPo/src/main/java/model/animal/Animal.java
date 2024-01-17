@@ -3,7 +3,7 @@ package model.animal;
 import enums.MapDirection;
 import interfaces.MoveValidator;
 import interfaces.MoveableWorldElement;
-import model.AnimalStatistic;
+import model.records.AnimalStatistic;
 import model.Genotype;
 import model.NewAnimalProductionProcess;
 import model.Vector2d;
@@ -18,7 +18,6 @@ public class Animal implements MoveableWorldElement {
     private int energyLevel;
     private MapDirection orientation;
     private final int bornDate;
-    private int dieDate = 0;
     private int age = 0;
     private int numberOfChildren = 0;
     private int eatenGrassNumber = 0;
@@ -89,10 +88,6 @@ public class Animal implements MoveableWorldElement {
 
     public void eat(){
         eatenGrassNumber++;
-    }
-
-    public void die(int date){
-        dieDate = date;
     }
 
     public void addNewChild(Animal child){

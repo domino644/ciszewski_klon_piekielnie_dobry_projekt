@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.*;
+import model.WorldMap;
 import model.records.AllParameters;
 import model.simulation.Simulation;
 import model.simulation.SimulationInitialize;
@@ -92,8 +92,7 @@ public class StartPresenter {
             WorldElementBox worldElementBox = new WorldElementBox(startAnimalEnergySpinner.getValue(), map);
             Simulation simulation = simulationInitialize.getSimulation();
             simulationCount++;
-            presenter.setWorldElementBox(worldElementBox);
-            presenter.setWorldMap(map);
+            presenter.setWorldMapAndWorldElementBox(map,worldElementBox);
             presenter.setWorldSimulation(simulation);
             map.addListener(presenter);
             stage.setOnCloseRequest(event -> handleCloseRequest(event, simulation));

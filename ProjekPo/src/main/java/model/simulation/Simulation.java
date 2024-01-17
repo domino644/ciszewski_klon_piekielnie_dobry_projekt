@@ -49,7 +49,7 @@ public class Simulation implements Runnable {
         animalMove.animalMoves(allAnimalsOnBoard);
         animalEats.animalEats();
         animalReproducing.animalReproducing(date);
-        animalClear.clearMap(allAnimalsOnBoard, date);
+        animalClear.clearMap(allAnimalsOnBoard);
         plantsRegenerator.plantsRegenerate();
         if (saveStats) {
             stats.add(map.getStatsKeeper().stringArgumentsGet());
