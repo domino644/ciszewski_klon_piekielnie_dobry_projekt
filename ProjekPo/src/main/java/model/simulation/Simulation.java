@@ -32,7 +32,7 @@ public class Simulation implements Runnable {
         saveStats = simulationParameters.saveStats();
         fileName = simulationParameters.filename();
         if(saveStats){
-            stats.add(new String[]{"Liczba zwierząt", "Liczba roślin", "Liczba wolnych pól", "Średni poziom energii", "Średnia długość życia", "Średnia liczba dzieci", "Najpopularniejszy genotyp"});
+            stats.add(new String[]{"Liczba zwierząt", "Śmierci", "Liczba roślin", "Liczba wolnych pól", "Średni poziom energii", "Średnia długość życia", "Średnia liczba dzieci", "Najpopularniejszy genotyp"});
         }
     }
 
@@ -52,7 +52,7 @@ public class Simulation implements Runnable {
         animalClear.clearMap(allAnimalsOnBoard, date);
         plantsRegenerator.plantsRegenerate();
         if (saveStats) {
-            stats.add(map.getStatsKeeper().getDailtyStatsAsString());
+            stats.add(map.getStatsKeeper().stringArgumentsGet());
         }
     }
 
