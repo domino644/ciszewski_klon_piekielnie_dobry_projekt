@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="presenter.SimulationPresenter"
+            minHeight="600.0" minWidth="1200.0">
+    <top>
+        <HBox alignment="BASELINE_CENTER" spacing="10">
+            <Button fx:id="startButton" text="Start Simulation" textAlignment="CENTER" onAction="#onSimulationStartClicked"/>
+            <Button fx:id="stopButton" text="Stop Simulation" textAlignment="CENTER" onAction="#onSimulationStopClicked" disable="true"/>
+            <Button fx:id="trackButton" text="Track Animal" textAlignment="CENTER" onAction="#trackAnimal"/>
+            <Button fx:id="stopTrackButton" text="Stop Track" textAlignment="CENTER" onAction="#stopTrackAnimal" disable="true"/>
+            <Button fx:id="showStatsButton" text="Show Statistic" textAlignment="CENTER" onAction="#showStatistic"/>
+            <Button fx:id="hideStatsButton" text="Hide Statistic" textAlignment="CENTER" onAction="#hideStatistic" disable="true"/>
+            <Button fx:id="showGrass" text="Show Grass" textAlignment="CENTER" onAction="#grassFieldShow" />
+            <Button fx:id="showGenotype" text="Show Genotype" textAlignment="CENTER" onAction="#genotypeShow" />
+        </HBox>
+    </top>
+    <center >
+        <HBox alignment="CENTER" style="-fx-padding: 10 10 10 10;">
+            <VBox alignment="CENTER_LEFT">
+                <GridPane fx:id="gridMapStats" alignment="CENTER"/>
+            </VBox>
+            <VBox alignment="CENTER">
+                <GridPane fx:id="mapGrid" gridLinesVisible="true" alignment="CENTER"/>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT">
+                <GridPane fx:id="gridAnimalStats" alignment="CENTER"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

@@ -1,4 +1,4 @@
-plugins {
+ plugins {
     id 'application'
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.0.13'
@@ -20,15 +20,19 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation('com.fasterxml.jackson.core:jackson-core:2.16.0')
+    implementation('com.fasterxml.jackson.core:jackson-annotations:2.16.0')
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.16.0')
+    implementation('com.opencsv:opencsv:4.1')
 }
 
 test {
     useJUnitPlatform()
 }
 
-//application {
-//    getMainClass().set('agh.ics.oop.World')
-//}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 
 java {
     toolchain {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            minHeight="550.0" minWidth="850.0"
+            fx:controller="presenter.StartPresenter">
+    <top>
+        <VBox spacing="5">
+            <HBox alignment="CENTER" spacing="10">
+                <Button text="Zapisz konfiguracje" onAction="#saveConfiguration"/>
+                <Button text="Wczytaj konfiguracje" onAction="#loadConfiguration"/>
+                <TextField fx:id="fileNameTextField" prefWidth="150"/>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Zapisuj statystyki"/>
+                <CheckBox fx:id="saveStatsCheckBox"/>
+                <TextField fx:id="statsNameTextField"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Enter parameters:"/>
+            <HBox alignment="CENTER" spacing="10">
+                <VBox alignment="BOTTOM_LEFT" spacing="10">
+                    <Label text="Map width"/>
+                    <Spinner fx:id="widthSpinner" editable="true" min="1" max="100" initialValue="10"/>
+                    <Label text="Map height"/>
+                    <Spinner fx:id="heightSpinner" editable="true" min="1" max="100" initialValue="10"/>
+                    <Label text="Number of animals"/>
+                    <Spinner fx:id="numberOfAnimalsSpinner" editable="true" min="0" initialValue="4"/>
+                    <Label text="Number of plants"/>
+                    <Spinner fx:id="numberOfPlantsSpinner" editable="true" min="0" initialValue="8"/>
+                    <Label text="Plant grow per day"/>
+                    <Spinner fx:id="numberOfPlantsGrowPerDaySpinner" editable="true" min="0" max="40" initialValue="2"/>
+                    <Label text="Start energy"/>
+                    <Spinner fx:id="startAnimalEnergySpinner" editable="true" min="0" max="100" initialValue="15"/>
+
+                </VBox>
+                <VBox alignment="BOTTOM_LEFT" spacing="10">
+                    <Label text="Minimal energy to reproduce"/>
+                    <Spinner fx:id="minimalEnergyToReproductionSpinner" editable="true" min="0" max="100" initialValue="5"/>
+                    <Label text="Reproducing energy"/>
+                    <Spinner fx:id="reproducingEnergySpinner" editable="true" max="100" min="0" initialValue="3"/>
+                    <Label text="Minimal mutations"/>
+                    <Spinner fx:id="minimalMutationNumberSpinner" editable="true" max="7" min="0" initialValue="4"/>
+                    <Label text="Maximum mutations"/>
+                    <Spinner fx:id="maximalMutationNumberSpinner" editable="true" min="0" max="7" initialValue="7"/>
+                    <Label text="Genotype length"/>
+                    <Spinner fx:id="genomeLengthSpinner" editable="true" max="8" min="1" initialValue="8"/>
+                    <Label text="Plant energy"/>
+                    <Spinner fx:id="plantEnergySpinner" editable="true" max="100" min="1" initialValue="3"/>
+                </VBox>
+            </HBox>
+            <Label text="Lost energy per day"/>
+            <Spinner fx:id="lostEnergyPerDaySpinner" editable="true" min="0" max="100" initialValue="3"/>
+            <Button text="Generate Simulation" onAction="#simulationStart"/>
+        </VBox>
+    </center>
+</BorderPane>
