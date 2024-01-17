@@ -38,9 +38,10 @@ public class WorldElementBox {
 
     public VBox createVbox(Vector2d vector2d, float cellWidth, float cellHeight, int option) {
         VBox vBox;
+        float imageSize = Math.min(cellHeight,cellWidth);
         Image img = fileNameMatch(vector2d);
         if (img != null) {
-            ImageView imageView = createImage(img, cellWidth, cellHeight);
+            ImageView imageView = createImage(img, imageSize, imageSize);
             vBox = new VBox(imageView);
             vBox.setAlignment(Pos.CENTER);
         } else {

@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 public class AnimalEats {
 
-    private static final AnimalComparator ANIMAL_COMPARATOR = new AnimalComparator();
     private final WorldMap map;
     private final int plantEnergy;
 

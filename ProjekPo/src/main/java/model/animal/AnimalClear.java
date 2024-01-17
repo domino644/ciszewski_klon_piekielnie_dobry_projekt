@@ -14,11 +14,10 @@ public class AnimalClear {
         this.map = map;
     }
 
-    public void clearMap(ArrayList<Animal> animalsOnBoard,int date) {
+    public void clearMap(ArrayList<Animal> animalsOnBoard) {
         HashMap<Vector2d, ArrayList<Animal>> animals = map.getAnimals();
         for (Animal animal : animalsOnBoard) {
             if (animal.getEnergyLevel() < 0) {
-                animal.die(date);
                 animals.get(animal.getPosition()).remove(animal);
                 map.getStatsKeeper().animalDied(animal);
             }

@@ -11,6 +11,6 @@ public class Plant implements WorldElement {
 
     @Override
     public Vector2d getPosition() {
-        return null;
+        return position;
     }
 }

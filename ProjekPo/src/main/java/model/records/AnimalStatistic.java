@@ -1,8 +1,10 @@
-package model;
+package model.records;
 
 import enums.MapDirection;
+import model.Genotype;
+import model.Vector2d;
 
-public record AnimalStatistic(Vector2d position,MapDirection orientation,Genotype genotype,
+public record AnimalStatistic(Vector2d position, MapDirection orientation, Genotype genotype,
                               int activeGenome, int energy, int eatenGrassesNumber, int children,
                               int successors, int age, int bornDate) {
 

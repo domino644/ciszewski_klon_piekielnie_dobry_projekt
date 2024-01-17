@@ -9,15 +9,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class JSONHandler {
-    public static boolean objectToFile(Object object, String filename){
+    public static void objectToFile(Object object, String filename){
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("ProjekPo/src/main/resources/configurations/" + filename);
         try{
         mapper.writeValue(file,object);
-        return true;
         }catch(IOException e){
             System.out.println(e.getMessage());
-            return false;
         }
     }
 
