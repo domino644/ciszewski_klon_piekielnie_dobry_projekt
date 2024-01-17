@@ -43,17 +43,11 @@ public class StatsKeeper {
     }
 
     private void addGenotype(Genotype genotype) {
-        if (genotypesPopularity.get(genotype) != null) {
-            genotypesPopularity.put(genotype, genotypesPopularity.remove(genotype) + 1);
-        } else {
-            genotypesPopularity.put(genotype, 1);
-        }
+        genotypesPopularity.put(genotype, genotypesPopularity.getOrDefault(genotype,0)+1);
     }
 
     private void removeGenotype(Genotype genotype) {
-        if (genotypesPopularity.get(genotype) != null) {
-            genotypesPopularity.put(genotype, genotypesPopularity.remove(genotype) - 1);
-        }
+        genotypesPopularity.put(genotype, genotypesPopularity.getOrDefault(genotype,1)-1);
     }
 
     public Genotype getMostPopularGenotype() {
@@ -168,5 +162,9 @@ public class StatsKeeper {
         return new String[]{Integer.toString(aliveAnimals.size()),Integer.toString(deadAnimals.size()),Integer.toString(numberOfPlants),
         Integer.toString(getNumberOfFreeFields()),Float.toString(getAverageEnergyLevel()),
         Float.toString(getAverageLifetime()),Float.toString(getAvgNumberOfKids()),gen};
+    }
+
+    public HashMap<Genotype, Integer> getGenotypesPopularity() {
+        return genotypesPopularity;
     }
 }
