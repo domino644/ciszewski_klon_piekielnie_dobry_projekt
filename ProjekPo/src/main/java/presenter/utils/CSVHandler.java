@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CSVHandler {
     public static void writeStatsToCSV(List<String[]> data, String fileName){
-        File file = new File("ProjekPo/src/main/resources/stats/" + fileName +".csv");
+        File file = new File("stats/" + fileName +".csv");
         try{
             FileWriter outputFile = new FileWriter(file);
 
