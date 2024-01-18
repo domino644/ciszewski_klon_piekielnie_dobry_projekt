@@ -4,14 +4,15 @@ package model;
 import model.animal.Animal;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class StatsKeeper {
     private final WorldMap map;
     private int numberOfPlants = 0;
     private final ArrayList<Animal> aliveAnimals = new ArrayList<>();
     private final LinkedList<Animal> deadAnimals = new LinkedList<>();
-    private final HashMap<Vector2d, Integer> plantsOccurence = new HashMap<>();
-    private final HashMap<Genotype, Integer> genotypesPopularity = new HashMap<>();
+    private final ConcurrentHashMap<Vector2d, Integer> plantsOccurence = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Genotype, Integer> genotypesPopularity = new ConcurrentHashMap<>();
 
 
     public StatsKeeper(WorldMap map) {
@@ -165,7 +166,7 @@ public class StatsKeeper {
         Float.toString(getAverageLifetime()),Float.toString(getAvgNumberOfKids()),gen};
     }
 
-    public HashMap<Genotype, Integer> getGenotypesPopularity() {
+    public ConcurrentHashMap<Genotype, Integer> getGenotypesPopularity() {
         return genotypesPopularity;
     }
 }
