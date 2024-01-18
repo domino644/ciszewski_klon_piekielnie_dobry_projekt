@@ -10,7 +10,7 @@ public class JSONHandler {
     public static void objectToFile(Object object, String filename) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            File file = new File("configurations/" + filename + ".json");
+            File file = new File("ProjekPo/configurations/" + filename + ".json");
             mapper.writeValue(file, object);
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -19,7 +19,7 @@ public class JSONHandler {
 
     public static AllParameters allParametersFromFile(String filename) {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("configurations/" + filename + ".json");
+        File file = new File("ProjekPo/configurations/" + filename + ".json");
         try {
             return mapper.readValue(file, AllParameters.class);
         } catch (IOException e) {
