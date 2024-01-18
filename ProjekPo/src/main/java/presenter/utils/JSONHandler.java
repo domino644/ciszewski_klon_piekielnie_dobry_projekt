@@ -2,11 +2,8 @@ package presenter.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.records.AllParameters;
-import model.records.SimulationParameters;
-import model.records.WorldParameters;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class JSONHandler {
